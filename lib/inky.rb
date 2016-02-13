@@ -1,7 +1,7 @@
 class Inky
   require 'rexml/document'
   require 'component_factory'
-  attr_accessor :components, :column_count, :component_tags
+  attr_accessor :components, :column_count, :component_lookup, :component_tags
 
   include ComponentFactory
   def initialize(options = {})
@@ -11,10 +11,12 @@ class Inky
       columns: 'columns',
       container: 'container',
       inky: 'inky',
-      blockGrid: 'block-grid',
+      block_grid: 'block-grid',
       menu: 'menu',
-      menuItem: 'item'
+      menu_item: 'item'
     }.merge(options[:components] || {})
+
+    self.component_lookup = self.components.invert
 
     self.column_count = options[:column_count] || 12
 
@@ -41,7 +43,7 @@ class Inky
         transform_doc(child)
       end
       component = self.component_factory(elem)
-      elem.replace_with(component)
+      elem.replace_with(component) if component
     end
     elem
   end
