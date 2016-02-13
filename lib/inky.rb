@@ -1,9 +1,10 @@
 class Inky
-  def initialize(options)
+  attr_accessor :components
+  def initialize(options = {})
     self.components = {
       button: 'button',
       row: 'row',
-      columns: 'columns'
+      columns: 'columns',
       container: 'container',
       inky: 'inky',
       blockGrid: 'block-grid',
