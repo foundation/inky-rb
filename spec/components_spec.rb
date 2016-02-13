@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe "Button" do
-  it "screates a simple button" do
+  it "creates a simple button" do
     input = '<button href="http://zurb.com">Button</button>';
     expected = <<HTML
       <table class="button">
