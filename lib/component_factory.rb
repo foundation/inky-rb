@@ -19,22 +19,31 @@ module ComponentFactory
   end
 
   def _transform_button(component, inner)
+    expand = _has_class(component, 'expand')
     if component.attributes['href']
-      inner = "<a href=\"#{component.attributes['href']}\">#{inner}</a>"
+      if expand
+        inner = "<a href=\"#{component.attributes['href']}\" align=\"center\" class=\"text-center\">#{inner}</a>"
+      else
+        inner = "<a href=\"#{component.attributes['href']}\">#{inner}</a>"
+      end
     end
-    if _has_class(component, 'expand')
-      inner = "<center>#{inner}</center>"
-    end
+    inner = "<center>#{inner}</center>" if expand
+
     classes = _class_array(component, ['button'])
-    return "<table class=\"#{classes.join(' ')}\"><tr><td><table><tr><td>#{inner}</td></tr></table></td></tr></table>"
+    if expand
+      return "<table class=\"#{classes.join(' ')}\"><tr><td><table><tr><td>#{inner}</td></tr></table></td><td class=\"expander\"></td></tr></table>"
+    else
+      return "<table class=\"#{classes.join(' ')}\"><tr><td><table><tr><td>#{inner}</td></tr></table></td></tr></table>"
+    end
   end
 
   def _transform_menu(component, inner)
-    "<table class=\"menu\"><tr>#{inner}</tr></table>"
+    classes = _class_array(component, ['menu'])
+    "<table class=\"#{classes.join(' ')}\"><tr><td><table><tr>#{inner}</tr></table></td></tr></table>"
   end
 
   def _transform_menu_item(component, inner)
-    "<td><a href=\"#{component.attributes['href']}\">#{inner}</a></td>"
+    "<th class=\"menu-item\"><a href=\"#{component.attributes['href']}\">#{inner}</a></th>"
   end
 
   def _transform_container(component, inner)

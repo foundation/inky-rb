@@ -46,11 +46,12 @@ RSpec.describe "Button" do
             <table>
               <tr>
                 <td>
-                  <center><a href="http://zurb.com">Button</a></center>
+                  <center><a href="http://zurb.com" align="center" class="text-center">Button</a></center>
                 </td>
               </tr>
             </table>
           </td>
+          <td class="expander"></td>
         </tr>
       </table>
     HTML
@@ -69,7 +70,34 @@ RSpec.describe "Menu" do
     expected = <<-HTML
       <table class="menu">
         <tr>
-          <td><a href="http://zurb.com">Item</a></td>
+          <td>
+            <table>
+              <tr>
+                <th class="menu-item"><a href="http://zurb.com">Item</a></th>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    HTML
+
+    compare(input, expected)
+  end
+
+  it 'creates a menu with classes' do
+    input = <<-INKY
+      <menu class="vertical">
+      </menu>
+    INKY
+    expected = <<-HTML
+      <table class="menu vertical">
+        <tr>
+          <td>
+            <table>
+              <tr>
+              </tr>
+            </table>
+          </td>
         </tr>
       </table>
     HTML
@@ -80,15 +108,19 @@ RSpec.describe "Menu" do
   it 'works without using an item tag' do
     input = <<-INKY
       <menu>
-        <td><a href="http://zurb.com">Item 1</a></td>
-        <td><a href="http://zurb.com">Item 2</a></td>
+        <th class="menu-item"><a href="http://zurb.com">Item 1</a></th>
       </menu>
     INKY
     expected = <<-HTML
       <table class="menu">
         <tr>
-          <td><a href="http://zurb.com">Item 1</a></td>
-          <td><a href="http://zurb.com">Item 2</a></td>
+          <td>
+            <table>
+              <tr>
+                <th class="menu-item"><a href="http://zurb.com">Item 1</a></th>
+              </tr>
+            </table>
+          </td>
         </tr>
       </table>
     HTML
