@@ -13,6 +13,7 @@ class Inky
       inky: 'inky',
       block_grid: 'block-grid',
       menu: 'menu',
+      center: 'center',
       menu_item: 'item'
     }.merge(options[:components] || {})
 

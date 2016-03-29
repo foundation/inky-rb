@@ -1,5 +1,56 @@
 require 'spec_helper'
 
+RSpec.describe "Center" do
+  it "applies a float-center class and center alignment attribute to the first child" do
+    input = '<center><div></div></center>';
+    expected = <<-HTML
+      <center>
+        <div align="center" class="float-center"></div>
+      </center>
+    HTML
+
+    compare(input, expected);
+  end
+
+  it "doesn't choke if center tags are nested" do
+    input = '<center><center>a</center></center>'
+
+    expected = <<-HTML
+      <center>
+        <center align="center" class="float-center">
+        a
+        </center>
+      </center>
+    HTML
+
+    compare(input, expected);
+  end
+
+  it "applies the class float-center to <item> elements" do
+    input = '<center><menu><item href="#"></item></menu></center>'
+
+    expected = <<-HTML
+      <center>
+        <table class="float-center menu " align="center">
+          <tr>
+            <td>
+              <table>
+                <tr>
+                  <th class="float-center menu-item">
+                    <a href="#"></a>
+                  </th>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </center>
+    HTML
+
+    compare(input, expected);
+  end
+end
+
 RSpec.describe "Button" do
   it "creates a simple button" do
     input = '<button href="http://zurb.com">Button</button>';

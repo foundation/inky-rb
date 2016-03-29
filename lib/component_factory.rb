@@ -4,7 +4,7 @@ module ComponentFactory
     # TODO:  Handle changed names
     transform_method = :"_transform_#{self.component_lookup[elem.name]}"
     if self.respond_to?(transform_method)
-      REXML::Document.new(self.send(transform_method, elem, inner))
+      REXML::Document.new(self.send(transform_method, elem, inner)).root
     else
       nil
     end
@@ -15,7 +15,7 @@ module ComponentFactory
   end
 
   def _class_array(elem, defaults = [])
-    elem.attributes['class'] ? (defaults.concat(elem.attributes['class'].split(' '))) : defaults
+    (elem.attributes['class'] ? (defaults.concat(elem.attributes['class'].split(' '))) : defaults).uniq
   end
 
   def _transform_button(component, inner)
@@ -59,7 +59,7 @@ module ComponentFactory
   # in inky.js this is factored out into makeClumn.  TBD if we need that here.
   def _transform_columns(component, inner)
 
-    col_count = component.parent.children.size
+    col_count = component.parent.elements.size
     small_size = component.attributes['small'] || self.column_count
     large_size = component.attributes['large'] || component.attributes['small'] || (self.column_count / col_count).to_i
 
@@ -76,5 +76,21 @@ module ComponentFactory
 
   def _transform_block_grid(component, inner)
     "<table class=\"block-grid up-#{component.attributes['up']}\"><tr>#{inner}</tr></table>"
+  end
+
+  def _transform_center(component, inner)
+    # NOTE:  Using children instead of elements because elements.to_a
+    # sometimes appears to miss elements that show up in size
+    component.elements.to_a.each do |child|
+      child.add_attribute('align', 'center')
+      child_classes = _class_array(child, ['float-center'])
+      child.add_attribute('class', child_classes.join(' '))
+      items = component.elements.to_a("//*[contains(@class,'menu-item')]").concat(component.elements.to_a("//item"))
+      items.each do |item|
+        item_classes = _class_array(item, ['float-center'])
+        item.add_attribute('class', item_classes.join(' '))
+      end
+    end
+    return component.to_s
   end
 end
