@@ -14,6 +14,8 @@ class Inky
       block_grid: 'block-grid',
       menu: 'menu',
       center: 'center',
+      callout: 'callout',
+      spacer: 'spacer',
       menu_item: 'item'
     }.merge(options[:components] || {})
 

@@ -93,4 +93,15 @@ module ComponentFactory
     end
     return component.to_s
   end
+
+  def _transform_callout(component, inner)
+    classes = _class_array(component, ['callout-inner'])
+    return "<table class=\"callout\"><tr><th class=\"#{classes.join(' ')}\">#{inner}</th><th class=\"expander\"></th></tr></table>"
+  end
+
+  def _transform_spacer(component, inner)
+    classes = _class_array(component, ['spacer'])
+    size = component.attributes['size'] || 16
+    return "<table class=\"#{classes.join(' ')}\"><tbody><tr><td height=\"#{size}px\" style=\"font-size:#{size}px;line-height:#{size}px;\">&#xA0;</td></tr></tbody></table>"
+  end
 end

@@ -179,3 +179,65 @@ RSpec.describe "Menu" do
     compare(input, expected)
   end
 end
+
+RSpec.describe "Callout" do
+  it "creates a callout with correct syntax" do
+    input = '<callout>Callout</callout>';
+    expected = <<-HTML
+      <table class="callout">
+        <tr>
+          <th class="callout-inner">Callout</th>
+          <th class="expander"></th>
+        </tr>
+      </table>
+    HTML
+
+    compare(input, expected);
+  end
+
+  it "copies classes to the final HTML" do
+    input = '<callout class="primary">Callout</callout>'
+    expected = <<-HTML
+      <table class="callout">
+        <tr>
+          <th class="callout-inner primary">Callout</th>
+          <th class="expander"></th>
+        </tr>
+      </table>
+    HTML
+
+    compare(input, expected);
+  end
+end
+  
+RSpec.describe "Spacer" do
+  it 'creates a spacer element with correct size' do
+    input = '<spacer size="10"></spacer>';
+    expected = <<-HTML
+      <table class="spacer">
+        <tbody>
+          <tr>
+            <td height="10px" style="font-size:10px;line-height:10px;">&#xA0;</td>
+          </tr>
+        </tbody>
+      </table>
+    HTML
+
+    compare(input, expected);
+  end
+  
+  it 'copies classes to the final spacer HTML' do
+    input = '<spacer size="10" class="bgcolor"></spacer>';
+    expected = <<-HTML
+      <table class="spacer bgcolor">
+        <tbody>
+          <tr>
+            <td height="10px" style="font-size:10px;line-height:10px;">&#xA0;</td>
+          </tr>
+        </tbody>
+      </table>
+    HTML
+
+    compare(input, expected);
+  end
+end
