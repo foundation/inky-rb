@@ -28,6 +28,7 @@ class Inky
 
 
   def release_the_kraken(xml_string)
+    xml_string = xml_string.gsub(/doctype/i, 'DOCTYPE')
     xml_doc = REXML::Document.new(xml_string)
     if self.components_exist?(xml_doc)
       self.transform_doc(xml_doc.root)

@@ -70,12 +70,16 @@ module ComponentFactory
     classes.push('last') unless component.next_element
 
     subrows = component.elements.to_a("//*[contains(@class,'row')]").concat(component.elements.to_a("//row"))
-    th_class = subrows.size == 0 ? ' class="expander"' : ''
-    "<th class=\"#{classes.join(' ')}\"><table><tr><th#{th_class}>#{inner}</th></tr></table></th>"
+    expander = ''
+    if large_size.to_i == self.column_count && subrows.size == 0
+      expander = "<th class=\"expander\"></th>"
+    end
+    "<th class=\"#{classes.join(' ')}\"><table><tr><th>#{inner}</th>#{expander}</tr></table></th>"
   end
 
   def _transform_block_grid(component, inner)
-    "<table class=\"block-grid up-#{component.attributes['up']}\"><tr>#{inner}</tr></table>"
+    classes = _class_array(component, ['block-grid', "up-#{component.attributes['up']}"])
+    "<table class=\"#{classes.join(' ')}\"><tr>#{inner}</tr></table>"
   end
 
   def _transform_center(component, inner)
