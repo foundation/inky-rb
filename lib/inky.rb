@@ -16,6 +16,7 @@ class Inky
       center: 'center',
       callout: 'callout',
       spacer: 'spacer',
+      wrapper: 'wrapper',
       menu_item: 'item'
     }.merge(options[:components] || {})
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe "Center" do
-  it "applies a float-center class and center alignment attribute to the first child" do
+  it "applies a text-center class and center alignment attribute to the first child" do
     input = '<center><div></div></center>';
     expected = <<-HTML
       <center>
@@ -97,7 +97,7 @@ RSpec.describe "Button" do
             <table>
               <tr>
                 <td>
-                  <center><a href="http://zurb.com" align="center" class="text-center">Button</a></center>
+                  <center><a href="http://zurb.com" align="center" class="float-center">Button</a></center>
                 </td>
               </tr>
             </table>
@@ -227,7 +227,7 @@ RSpec.describe "Spacer" do
   end
   
   it 'copies classes to the final spacer HTML' do
-    input = '<spacer size="10" class="bgcolor"></spacer>';
+    input = '<spacer size="10" class="bgcolor"></spacer>'
     expected = <<-HTML
       <table class="spacer bgcolor">
         <tbody>
@@ -235,6 +235,21 @@ RSpec.describe "Spacer" do
             <td height="10px" style="font-size:10px;line-height:10px;">&#xA0;</td>
           </tr>
         </tbody>
+      </table>
+    HTML
+
+    compare(input, expected);
+  end
+end
+
+RSpec.describe "Wrapper" do
+  it 'creates a wrapper that you can attach classes to' do
+    input = '<wrapper class="header"></wrapper>'
+    expected = <<-HTML
+      <table class="wrapper header" align="center">
+        <tr>
+          <td class="wrapper-inner"></td>
+        </tr>
       </table>
     HTML
 

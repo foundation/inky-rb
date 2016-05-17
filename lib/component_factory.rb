@@ -22,7 +22,7 @@ module ComponentFactory
     expand = _has_class(component, 'expand')
     if component.attributes['href']
       if expand
-        inner = "<a href=\"#{component.attributes['href']}\" align=\"center\" class=\"text-center\">#{inner}</a>"
+        inner = "<a href=\"#{component.attributes['href']}\" align=\"center\" class=\"float-center\">#{inner}</a>"
       else
         inner = "<a href=\"#{component.attributes['href']}\">#{inner}</a>"
       end
@@ -107,5 +107,10 @@ module ComponentFactory
     classes = _class_array(component, ['spacer'])
     size = component.attributes['size'] || 16
     return "<table class=\"#{classes.join(' ')}\"><tbody><tr><td height=\"#{size}px\" style=\"font-size:#{size}px;line-height:#{size}px;\">&#xA0;</td></tr></tbody></table>"
+  end
+
+  def _transform_wrapper(component, inner)
+    classes = _class_array(component, ['wrapper'])
+    return "<table class=\"#{classes.join(' ')}\" align=\"center\"><tr><td class=\"wrapper-inner\">#{inner}</td></tr></table>"
   end
 end
