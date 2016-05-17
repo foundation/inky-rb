@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'inky'
-  s.version     = '0.0.0'
+  s.version     = '0.0.1'
   s.date        = '2016-02-12'
   s.summary     = 'Inky coming!'
   s.description = 'Inky coming!'
