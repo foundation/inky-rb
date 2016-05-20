@@ -57,6 +57,7 @@ module Inky
 end
 begin
   # Only valid in rails environments
+  require 'foundation_emails'
   require 'inky/rails/engine'
   require 'inky/rails/template_handler'
   require 'inky/rails/version'
