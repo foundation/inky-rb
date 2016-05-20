@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'inky'
+  s.name        = 'inky-rb'
   s.version     = '0.0.2'
   s.date        = '2016-02-12'
   s.summary     = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails, a responsive email framework from ZURB.  '
