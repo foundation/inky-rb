@@ -69,6 +69,25 @@ RSpec.describe "Button" do
     HTML
     compare(input, expected);
   end
+
+  it 'creates a button with target="_blank" attribute' do
+    input = '<button href="http://zurb.com" target="_blank">Button</button>'
+    expected = <<-HTML
+      <table class="button">
+        <tr>
+          <td>
+            <table>
+              <tr>
+                <td><a href="http://zurb.com" target="_blank">Button</a></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    HTML
+    compare(input, expected)
+  end
+
   it 'creates a button with classes' do
     input = '<button class="small alert" href="http://zurb.com">Button</button>'
     expected = <<-HTML
@@ -125,6 +144,29 @@ RSpec.describe "Menu" do
             <table>
               <tr>
                 <th class="menu-item"><a href="http://zurb.com">Item</a></th>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    HTML
+
+    compare(input, expected)
+  end
+
+  it 'creates a menu with items tags inside, containing target="_blank" attribute' do
+    input = <<-INKY
+      <menu>
+        <item href="http://zurb.com" target="_blank">Item</item>
+      </menu>
+    INKY
+    expected = <<-HTML
+      <table class="menu">
+        <tr>
+          <td>
+            <table>
+              <tr>
+                <th class="menu-item"><a href="http://zurb.com" target="_blank">Item</a></th>
               </tr>
             </table>
           </td>
@@ -225,7 +267,61 @@ RSpec.describe "Spacer" do
 
     compare(input, expected);
   end
-  
+
+  it 'creates a spacer element for small screens with correct size' do
+    input = '<spacer size-sm="10"></spacer>'
+    expected = <<-HTML
+      <table class="spacer hide-for-large">
+        <tbody>
+          <tr>
+            <td height="10px" style="font-size:10px;line-height:10px;">&#xA0;</td>
+          </tr>
+        </tbody>
+      </table>
+    HTML
+
+    compare(input, expected)
+  end
+
+  it 'creates a spacer element for large screens with correct size' do
+    input = '<spacer size-lg="20"></spacer>'
+    expected = <<-HTML
+      <table class="spacer show-for-large">
+        <tbody>
+          <tr>
+            <td height="20px" style="font-size:20px;line-height:20px;">&#xA0;</td>
+          </tr>
+        </tbody>
+      </table>
+    HTML
+
+    compare(input, expected)
+  end
+
+  it 'creates a spacer element for small and large screens with correct sizes' do
+    input = '<spacer size-sm="10" size-lg="20"></spacer>'
+    expected = <<-HTML
+      <span>
+        <table class="spacer hide-for-large">
+          <tbody>
+            <tr>
+              <td height="10px" style="font-size:10px;line-height:10px;">&#xA0;</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="spacer show-for-large">
+          <tbody>
+            <tr>
+              <td height="20px" style="font-size:20px;line-height:20px;">&#xA0;</td>
+            </tr>
+          </tbody>
+        </table>
+      </span>
+    HTML
+
+    compare(input, expected)
+  end
+
   it 'copies classes to the final spacer HTML' do
     input = '<spacer size="10" class="bgcolor"></spacer>'
     expected = <<-HTML
@@ -256,3 +352,12 @@ RSpec.describe "Wrapper" do
     compare(input, expected);
   end
 end
+
+#RSpec.describe "raw" do
+#  it 'creates a wrapper that ignores anything inside' do
+#    input = "<raw><<LCG Program\TG LCG Coupon Code Default='246996'>></raw>"
+#    expected = "<<LCG Program\TG LCG Coupon Code Default='246996'>>"
+#
+#    compare(input, expected)
+#  end
+#end
