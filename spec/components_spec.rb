@@ -353,11 +353,14 @@ RSpec.describe "Wrapper" do
   end
 end
 
-#RSpec.describe "raw" do
-#  it 'creates a wrapper that ignores anything inside' do
-#    input = "<raw><<LCG Program\TG LCG Coupon Code Default='246996'>></raw>"
-#    expected = "<<LCG Program\TG LCG Coupon Code Default='246996'>>"
-#
-#    compare(input, expected)
-#  end
-#end
+RSpec.describe "raw" do
+  it 'creates a wrapper that ignores anything inside' do
+    input = "<raw><<LCG Program\TG LCG Coupon Code Default='246996'>></raw>"
+    expected = "<<LCG Program\TG LCG Coupon Code Default='246996'>>"
+
+    # Can't do vanilla compare because the second will fail to parse
+    inky = Inky::Core.new
+    output = inky.release_the_kraken(input)
+    expect(output).to eql(expected)
+  end
+end
