@@ -31,11 +31,13 @@ module Inky
 
     def release_the_kraken(xml_string)
       xml_string = xml_string.gsub(/doctype/i, 'DOCTYPE')
-      xml_doc = REXML::Document.new(xml_string)
+      raws, str = Inky::Core.extract_raws(xml_string)
+      xml_doc = REXML::Document.new(str)
       if self.components_exist?(xml_doc)
         self.transform_doc(xml_doc.root)
       end
-      return xml_doc.to_s
+      str = xml_doc.to_s
+      return Inky::Core.re_inject_raws(str, raws)
     end
 
 
@@ -52,6 +54,27 @@ module Inky
         elem.replace_with(component) if component
       end
       elem
+    end
+
+    def self.extract_raws(string)
+      raws = []
+      i = 0
+      regex = /\< *raw *\>(.*?)\<\/ *raw *\>/i;
+      str = string
+      while raw = str.match(regex)
+        raws[i] = raw[1]
+        str = str.sub(regex, "###RAW#{i}###")
+        i = i + 1
+      end
+      return [raws, str]
+     end
+
+    def self.re_inject_raws(string, raws)
+      str = string
+      raws.each_with_index do |val, i|
+        str = str.sub("###RAW#{i}###", val)
+      end
+      return str
     end
   end
 end

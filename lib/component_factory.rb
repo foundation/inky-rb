@@ -10,6 +10,17 @@ module ComponentFactory
     end
   end
 
+  def _pass_through_attributes(elem)
+    ignored = ['class', 'id', 'href', 'size', 'large', 'no-expander', 'small', 'target'];
+    elem.attributes.map do |name, value|
+      if ignored.include?(name.downcase)
+        ''
+      else
+        "#{name}=\"#{value}\""
+      end
+    end.join(' ')
+  end
+
   def _has_class(elem, klass)
     !!elem.attributes['class'] && elem.attributes['class'].split(' ').include?(klass)
   end
@@ -18,13 +29,18 @@ module ComponentFactory
     (elem.attributes['class'] ? (defaults.concat(elem.attributes['class'].split(' '))) : defaults).uniq
   end
 
+  def _target_attribute(elem)
+    elem.attributes['target'] ? " target=\"#{elem.attributes['target']}\"" : ''
+  end
+
   def _transform_button(component, inner)
     expand = _has_class(component, 'expand')
     if component.attributes['href']
+      target = _target_attribute(component)
       if expand
-        inner = "<a href=\"#{component.attributes['href']}\" align=\"center\" class=\"float-center\">#{inner}</a>"
+        inner = "<a href=\"#{component.attributes['href']}\"#{target} align=\"center\" class=\"float-center\">#{inner}</a>"
       else
-        inner = "<a href=\"#{component.attributes['href']}\">#{inner}</a>"
+        inner = "<a href=\"#{component.attributes['href']}\"#{target}>#{inner}</a>"
       end
     end
     inner = "<center>#{inner}</center>" if expand
@@ -43,7 +59,8 @@ module ComponentFactory
   end
 
   def _transform_menu_item(component, inner)
-    "<th class=\"menu-item\"><a href=\"#{component.attributes['href']}\">#{inner}</a></th>"
+    target = _target_attribute(component)
+    "<th class=\"menu-item\"><a href=\"#{component.attributes['href']}\"#{target}>#{inner}</a></th>"
   end
 
   def _transform_container(component, inner)
@@ -53,7 +70,8 @@ module ComponentFactory
 
   def _transform_row(component, inner)
     classes = _class_array(component, ['row'])
-    "<table class=\"#{classes.join(' ')}\"><tbody><tr>#{inner}</tr></tbody></table>"
+    attrs = _pass_through_attributes(component)
+    "<table #{attrs} class=\"#{classes.join(' ')}\"><tbody><tr>#{inner}</tr></tbody></table>"
   end
 
   # in inky.js this is factored out into makeClumn.  TBD if we need that here.
@@ -105,8 +123,26 @@ module ComponentFactory
 
   def _transform_spacer(component, inner)
     classes = _class_array(component, ['spacer'])
-    size = component.attributes['size'] || 16
-    return "<table class=\"#{classes.join(' ')}\"><tbody><tr><td height=\"#{size}px\" style=\"font-size:#{size}px;line-height:#{size}px;\">&#xA0;</td></tr></tbody></table>"
+    size = component.attributes['size']
+    size_sm = component.attributes['size-sm']
+    size_lg = component.attributes['size-lg']
+    if size_sm || size_lg
+      html = ''
+      if size_sm
+        html += "<table class=\"#{classes.join(' ')} hide-for-large\"><tbody><tr><td height=\"#{size_sm}px\" style=\"font-size:#{size_sm}px;line-height:#{size_sm}px;\">&#xA0;</td></tr></tbody></table>"
+      end
+      if size_lg
+        html += "<table class=\"#{classes.join(' ')} show-for-large\"><tbody><tr><td height=\"#{size_lg}px\" style=\"font-size:#{size_lg}px;line-height:#{size_lg}px;\">&#xA0;</td></tr></tbody></table>"
+      end
+      if size_sm && size_lg
+        # REXML doesn't like replacing a single element with a double
+        html = "<span>#{html}</span>"
+      end
+      return html
+    else
+      size ||= 16
+      return "<table class=\"#{classes.join(' ')}\"><tbody><tr><td height=\"#{size}px\" style=\"font-size:#{size}px;line-height:#{size}px;\">&#xA0;</td></tr></tbody></table>"
+    end
   end
 
   def _transform_wrapper(component, inner)

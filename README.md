@@ -40,7 +40,7 @@ And get complicated, but battle-tested, email-ready HTML like this:
 
 Add this line to your application's Gemfile:
 
-    $ gem 'foundation-rails'
+    $ gem 'foundation-rails', require: 'inky'
 
 And then execute:
 
@@ -84,5 +84,4 @@ Here are the names of the defaults:
 
 ## Programmatic Use
 
-The Inky parser can be accessed directly for programmatic use. 
-
+The Inky parser can be accessed directly for programmatic use.
