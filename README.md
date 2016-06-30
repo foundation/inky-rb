@@ -36,28 +36,33 @@ And get complicated, but battle-tested, email-ready HTML like this:
 </table>
 ```
 
-## Installation
+## Getting Started
 
-Add this line to your application's Gemfile:
+Add the following gems to your Gemfile, then run `bundle install`:
 
-    $ gem 'inky-rb', require: 'inky'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install inky-rb
-
-## Usage
-
-Inky can be embedded into your asset pipeline, combining with premailer to let you generate amazing HTML emails without the nightmare of table-based email development.
-
-Simply use the file extension `.inky` and make sure your email layout includes a scss file that includes the foundation-emails styles.
+```ruby
+gem 'inky-rb', require: 'inky'
+# Stylesheet inlining for email **
+gem 'premailer-rails'
 ```
-@import 'foundation-emails'
+
+** (The majority of email clients ignore linked stylesheets. By inlining your referenced styles, `premailer-rails` lets you keep your markup and stylesheets in separate files.)
+
+Make sure that the stylesheet included in your email layout imports the Foundation for Emails styles:
+
+```scss
+// my_awesome_emails_stylesheet.scss
+@import "foundation-emails";
 ```
+
+Rename your email templates to use the `.inky` file extension. For example:
+
+```
+welcome.html      => welcome.html.inky
+pw_reset.html.erb => pw_reset.html.inky
+```
+
+You're all set!
 
 ## Custom Elements
 
