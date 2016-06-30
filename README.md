@@ -59,7 +59,7 @@ Make sure that the stylesheet included in your email layout imports the Foundati
 @import "foundation-emails";
 ```
 
-Rename your email templates to use the `.inky` file extension. Note that you'll still have access to your instance `@variable`s within `.inky` templates:
+Rename your email templates to use the `.inky` file extension. Note that you'll still be able to use ERB within the `.inky` templates:
 
 ```
 welcome.html      => welcome.html.inky
