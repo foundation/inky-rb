@@ -38,7 +38,7 @@ And get complicated, but battle-tested, email-ready HTML like this:
 
 ## Getting Started
 
-Add the following gems to your Gemfile, then run `bundle install`:
+Add the following gems to your Gemfile:
 
 ```ruby
 gem 'inky-rb', require: 'inky'
@@ -46,7 +46,11 @@ gem 'inky-rb', require: 'inky'
 gem 'premailer-rails'
 ```
 
-** (The majority of email clients ignore linked stylesheets. By inlining your referenced styles, `premailer-rails` lets you keep your markup and stylesheets in separate files.)
+Then execute:
+
+```bash
+bundle install
+```
 
 Make sure that the stylesheet included in your email layout imports the Foundation for Emails styles:
 
@@ -63,6 +67,8 @@ pw_reset.html.erb => pw_reset.html.inky
 ```
 
 You're all set!
+
+** (The majority of email clients ignore linked stylesheets. By inlining your referenced styles, `premailer-rails` lets you keep your markup and stylesheets in separate files.)
 
 ## Custom Elements
 
