@@ -55,7 +55,8 @@ bundle install
 Make sure that the stylesheet included in your email layout imports the Foundation for Emails styles:
 
 ```scss
-// my_awesome_emails_stylesheet.scss
+// app/assets/stylesheets/your_emails_stylesheet.scss
+
 @import "foundation-emails";
 ```
 
@@ -66,9 +67,38 @@ welcome.html      => welcome.html.inky
 pw_reset.html.erb => pw_reset.html.inky
 ```
 
+Ensure your mailer layout has the following structure:
+
+```html
+<!-- app/views/layouts/your_mailer_layout.html.erb -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- Enables media queries -->
+  <meta name="viewport" content="width=device-width"/>
+  <!-- Link to the email's CSS, which will be inlined into the email -->
+  <link rel="stylesheet" href="assets/css/foundation-emails.css">
+</head>
+
+<body>
+  <table class="body" data-made-with-foundation>
+    <tr>
+      <td class="center" align="center" valign="top">
+        <center>
+          <%= yield %>
+        </center>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+```
+
 You're all set!
 
-** The majority of email clients ignore linked stylesheets. By inlining your referenced styles, `premailer-rails` lets you keep your markup and stylesheets in separate files.
+** The majority of email clients ignore linked stylesheets. By using a CSS inliner like `premailer-rails` or `roadie`, you're able to leave your stylesheets in a separate file, keeping your markup lean.
 
 ## Custom Elements
 
