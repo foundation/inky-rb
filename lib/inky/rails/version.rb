@@ -1,5 +1,5 @@
 module Inky
   module Rails
-    VERSION="0.0.3"
+    VERSION = "1.3.6.0"
   end
 end
