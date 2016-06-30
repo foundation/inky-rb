@@ -40,7 +40,7 @@ And get complicated, but battle-tested, email-ready HTML like this:
 
 Add this line to your application's Gemfile:
 
-    $ gem 'foundation-rails', require: 'inky'
+    $ gem 'inky-rb', require: 'inky'
 
 And then execute:
 
@@ -48,7 +48,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install foundation-rails
+    $ gem install inky-rb
 
 ## Usage
 

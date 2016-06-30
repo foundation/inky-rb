@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    inky-rb (0.0.2)
+    inky-rb (0.0.3)
       foundation_emails (~> 2)
 
 GEM
@@ -9,8 +9,8 @@ GEM
   specs:
     diff-lcs (1.2.5)
     foundation_emails (2.1.0.1)
-    rake (11.1.2)
-    rspec-core (3.4.1)
+    rake (11.2.2)
+    rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -28,4 +28,4 @@ DEPENDENCIES
   rspec-expectations
 
 BUNDLED WITH
-   1.10.6
+   1.12.4
