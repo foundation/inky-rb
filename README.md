@@ -59,7 +59,7 @@ Make sure that the stylesheet included in your email layout imports the Foundati
 @import "foundation-emails";
 ```
 
-Rename your email templates to use the `.inky` file extension. For example:
+Rename your email templates to use the `.inky` file extension. Note that you'll still have access your instance `@variable`s within `.inky` templates:
 
 ```
 welcome.html      => welcome.html.inky
@@ -68,7 +68,7 @@ pw_reset.html.erb => pw_reset.html.inky
 
 You're all set!
 
-** (The majority of email clients ignore linked stylesheets. By inlining your referenced styles, `premailer-rails` lets you keep your markup and stylesheets in separate files.)
+** The majority of email clients ignore linked stylesheets. By inlining your referenced styles, `premailer-rails` lets you keep your markup and stylesheets in separate files.
 
 ## Custom Elements
 
