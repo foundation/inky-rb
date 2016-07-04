@@ -5,7 +5,6 @@ require 'inky/rails/version'
 Gem::Specification.new do |s|
   s.name        = 'inky-rb'
   s.version     = Inky::Rails::VERSION
-  s.date        = '2016-02-12'
   s.summary     = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails, a responsive email framework from ZURB.  '
   s.description = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails, a responsive email framework from ZURB.  '
   s.authors     = ["ZURB"]
