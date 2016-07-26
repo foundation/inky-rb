@@ -92,8 +92,7 @@ module ComponentFactory
     classes.push('first') unless component.previous_element
     classes.push('last') unless component.next_element
 
-    subrows = component.elements.css("row, .row").to_a
-    # subrows = component.elements.to_a("//*[contains(@class,'row')]").concat(component.elements.to_a("//row"))
+    subrows = component.elements.css(".row").to_a.concat(component.elements.css("row").to_a)
     expander = ''
     if large_size.to_i == self.column_count && subrows.size == 0
       expander = "<th class=\"expander\"></th>"
@@ -113,7 +112,7 @@ module ComponentFactory
       child['align'] = 'center'
       child_classes = _class_array(child, ['float-center'])
       child['class'] = child_classes.join(' ')
-      items = component.elements.css(".menu-item, item").to_a
+      items = component.elements.css(".menu-item").to_a.concat(component.elements.css("item").to_a)
       items.each do |item|
         item_classes = _class_array(item, ['float-center'])
         item['class'] = item_classes.join(' ')
