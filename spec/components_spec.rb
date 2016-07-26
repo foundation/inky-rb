@@ -251,7 +251,7 @@ RSpec.describe "Callout" do
     compare(input, expected);
   end
 end
-  
+
 RSpec.describe "Spacer" do
   it 'creates a spacer element with correct size' do
     input = '<spacer size="10"></spacer>';
@@ -355,8 +355,8 @@ end
 
 RSpec.describe "raw" do
   it 'creates a wrapper that ignores anything inside' do
-    input = "<raw><<LCG Program\TG LCG Coupon Code Default='246996'>></raw>"
-    expected = "<<LCG Program\TG LCG Coupon Code Default='246996'>>"
+    input = "<body><raw><<LCG Program\TG LCG Coupon Code Default='246996'>></raw></body>"
+    expected = "<?xml version=\"1.0\"?>\n<body><<LCG ProgramTG LCG Coupon Code Default='246996'>></body>\n"
 
     # Can't do vanilla compare because the second will fail to parse
     inky = Inky::Core.new
