@@ -74,7 +74,7 @@ module Inky
       raws.each_with_index do |val, i|
         str = str.sub("###RAW#{i}###", val)
       end
-      return str
+      return str.html_safe
     end
   end
 end
