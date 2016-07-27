@@ -214,6 +214,35 @@ RSpec.describe 'Grid' do
     compare(input, expected)
   end
 
+  it 'assigns small as full width and large as half width if neither is defined and there are two columns' do
+    input = <<-INKY
+    <body>
+      <columns>One</columns>
+      <columns>Two</columns>
+    </body>
+    INKY
+    expected = <<-HTML
+    <body>
+      <th class="small-12 large-6 columns first">
+        <table>
+          <tr>
+            <th>One</th>
+          </tr>
+        </table>
+      </th>
+      <th class="small-12 large-6 columns last">
+        <table>
+          <tr>
+            <th>Two</th>
+          </tr>
+        </table>
+      </th>
+    </body>
+    HTML
+
+    compare(input, expected)
+  end
+
   it 'supports nested grids' do
     input = '<row><columns><row></row></columns></row>'
     expected = <<-HTML

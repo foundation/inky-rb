@@ -80,11 +80,12 @@ module ComponentFactory
   def _transform_columns(component, inner)
 
     col_count = component.parent.elements.size
-    small_attr = component.attribute('small')
-    large_attr = component.attribute('large')
 
-    small_size = small_attr ? small_attr.value : self.column_count
-    large_size = large_attr ? large_attr.value : small_size || (self.column_count / col_count).to_i
+    small_val = component.attribute('small') ? component.attribute('small').value : nil
+    large_val = component.attribute('large') ? component.attribute('large').value : nil
+
+    small_size = small_val || self.column_count
+    large_size = large_val || small_val || (self.column_count / col_count).to_i
 
     classes = _class_array(component, ["small-#{small_size}", "large-#{large_size}", "columns"])
 
