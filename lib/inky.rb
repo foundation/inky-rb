@@ -74,7 +74,12 @@ module Inky
       raws.each_with_index do |val, i|
         str = str.sub("###RAW#{i}###", val)
       end
-      return str.html_safe
+      # If we're in rails, these should be considered safe strings
+      if str.respond_to?(:html_safe)
+        return str.html_safe
+      else
+        return str
+      end
     end
   end
 end
