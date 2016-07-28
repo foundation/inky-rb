@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
 
   s.add_dependency "foundation_emails", "~> 2"
+  s.add_dependency "nokogiri"
   s.add_development_dependency "bundler", "~> 1.6"
   s.add_development_dependency "rake"
 end
