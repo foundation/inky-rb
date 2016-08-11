@@ -141,7 +141,6 @@ module ComponentFactory
         html += "<table class=\"#{classes.join(' ')} show-for-large\"><tbody><tr><td height=\"#{size_lg}px\" style=\"font-size:#{size_lg}px;line-height:#{size_lg}px;\">&#xA0;</td></tr></tbody></table>"
       end
       if size_sm && size_lg
-        # REXML doesn't like replacing a single element with a double
         html = "<span>#{html}</span>"
       end
       return html

@@ -1,3 +1,5 @@
+require 'inky/configuration'
+
 module Inky
   class Core
     require 'nokogiri'
