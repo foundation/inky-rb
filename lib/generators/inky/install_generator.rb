@@ -11,7 +11,7 @@ module Inky
       def preserve_original_mailer_layout
         return nil unless layout_name == 'mailer'
 
-        original_mailer = File.join(layouts_base_dir, "mailer.html.#{extenstion}")
+        original_mailer = File.join(layouts_base_dir, "mailer.html.#{extension}")
         rename_filename = File.join(layouts_base_dir, "old_mailer_#{Time.now.to_i}.html.erb")
         File.rename(original_mailer, rename_filename) if File.exists? original_mailer
       end
