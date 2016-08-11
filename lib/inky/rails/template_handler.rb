@@ -2,12 +2,12 @@ module Inky
   module Rails
     class TemplateHandler
       class << self
-        def erb_handler
-          @erb_handler ||= ActionView::Template.registered_template_handler(:erb)
+        def engine_handler
+          @@engine_handler ||= ActionView::Template.registered_template_handler(::Inky.configuration.template_engine)
         end
 
         def call(template)
-          compiled_source = erb_handler.call(template)
+          compiled_source = engine_handler.call(template)
           "Inky::Core.new.release_the_kraken(begin; #{compiled_source};end)"
         end
       end
