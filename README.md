@@ -62,9 +62,11 @@ Run the following command to set up the required styles and mailer layout:
 rails g inky:install
 ```
 
-(You can specify the generated mailer layout filename like so: `rails g inky:install some_name`)
+(You can specify the generated mailer layout filename like so: `rails g inky:install some_name` and also your prefered
+markup language like: `rails g inky:install mailer_layout slim`)
 
-Rename your email templates to use the `.inky` file extension. Note that you'll still be able to use ERB within the `.inky` templates:
+Rename your email templates to use the `.inky` file extension. Note that you'll still be able to use your default
+template engine within the `.inky` templates:
 
 ```
 welcome.html      => welcome.html.inky
@@ -74,6 +76,21 @@ pw_reset.html.erb => pw_reset.html.inky
 You're all set!
 
 ** The majority of email clients ignore linked stylesheets. By using a CSS inliner like `premailer-rails` or `roadie`, you're able to leave your stylesheets in a separate file, keeping your markup lean.
+
+## Alternative template engine
+
+If you do not use ERB for your views and layouts but some other markup like Haml or Slim, you can configure Inky to
+use these languages. To do so, just set an initializer:
+
+```ruby
+# config/initializers/inky.rb
+Inky.configure do |config|
+  config.template_engine = :slim
+end
+```
+
+Check [lib/generators/inky/templates/mailer_layout.html.slim](lib/generators/inky/templates/mailer_layout.html.slim)
+for a Slim example.
 
 ## Custom Elements
 
