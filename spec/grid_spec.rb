@@ -269,6 +269,21 @@ RSpec.describe 'Grid' do
 
     compare(input, expected)
   end
+
+  it 'transfer column align and valign to html tables' do
+    input = '<columns large="3" valign="top" align="middle">Top</columns>'
+    expected = <<-HTML
+      <th class="small-12 large-3 columns first last" align="middle" valign="top">
+        <table>
+          <tr>
+            <th>Top</th>
+          </tr>
+        </table>
+      </th>
+    HTML
+
+    compare(input, expected)
+  end
 end
 
 RSpec.describe 'Block Grid' do
