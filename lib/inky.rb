@@ -59,7 +59,7 @@ module Inky
     def self.extract_raws(string)
       raws = []
       i = 0
-      regex = /\< *raw *\>(.*?)\<\/ *raw *\>/i;
+      regex = /\< *raw *\>(.*?)\<\/ *raw *\>/i
       str = string
       while raw = str.match(regex)
         raws[i] = raw[1]
@@ -67,7 +67,7 @@ module Inky
         i = i + 1
       end
       return [raws, str]
-     end
+    end
 
     def self.re_inject_raws(string, raws)
       str = string
