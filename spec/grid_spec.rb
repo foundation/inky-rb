@@ -46,8 +46,21 @@ end
 RSpec.describe 'Grid' do
   it 'creates a row' do
     input = '<row></row>'
-    expected =  <<-HTML
+    expected = <<-HTML
       <table class="row">
+        <tbody>
+          <tr></tr>
+        </tbody>
+      </table>
+    HTML
+
+    compare(input, expected)
+  end
+
+  it 'creates a row along extra attributes without ignored ones' do
+    input = '<row id="a-row" disabled="disabled"></row>'
+    expected = <<-HTML
+      <table disabled="disabled" class="row">
         <tbody>
           <tr></tr>
         </tbody>
@@ -155,7 +168,7 @@ RSpec.describe 'Grid' do
     compare(input, expected)
   end
 
-  #if it just has small, borrow from small for large
+  # if it just has small, borrow from small for large
   it 'automatically assigns large columns if no large attribute is assigned' do
     input = <<-HTML
     <body>
@@ -265,6 +278,21 @@ RSpec.describe 'Grid' do
           </tr>
         </tbody>
       </table>
+    HTML
+
+    compare(input, expected)
+  end
+
+  it 'transfer column align and valign to html tables' do
+    input = '<columns large="3" valign="top" align="middle">Top</columns>'
+    expected = <<-HTML
+      <th class="small-12 large-3 columns first last" align="middle" valign="top">
+        <table>
+          <tr>
+            <th>Top</th>
+          </tr>
+        </table>
+      </th>
     HTML
 
     compare(input, expected)
