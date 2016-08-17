@@ -46,7 +46,7 @@ end
 RSpec.describe 'Grid' do
   it 'creates a row' do
     input = '<row></row>'
-    expected =  <<-HTML
+    expected = <<-HTML
       <table class="row">
         <tbody>
           <tr></tr>
@@ -155,7 +155,7 @@ RSpec.describe 'Grid' do
     compare(input, expected)
   end
 
-  #if it just has small, borrow from small for large
+  # if it just has small, borrow from small for large
   it 'automatically assigns large columns if no large attribute is assigned' do
     input = <<-HTML
     <body>
@@ -293,5 +293,4 @@ RSpec.describe 'Block Grid' do
 
     compare(input, expected)
   end
-
 end

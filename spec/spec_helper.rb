@@ -1,6 +1,5 @@
 require 'inky'
 
-require 'rexml/document'
 def compare(input, expected)
   inky = Inky::Core.new
   output = inky.release_the_kraken(input)
