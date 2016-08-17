@@ -89,7 +89,6 @@ module ComponentFactory
 
     classes = _class_array(component, ["small-#{small_size}", "large-#{large_size}", "columns"])
 
-
     classes.push('first') unless component.previous_element
     classes.push('last') unless component.next_element
 
@@ -98,7 +97,16 @@ module ComponentFactory
     if large_size.to_i == self.column_count && subrows.size == 0
       expander = "<th class=\"expander\"></th>"
     end
-    "<th class=\"#{classes.join(' ')}\"><table><tr><th>#{inner}</th>#{expander}</tr></table></th>"
+
+    "<th class=\"#{classes.join(' ')}\"#{_column_alignment(component)}><table><tr><th>#{inner}</th>#{expander}</tr></table></th>"
+  end
+
+  def _column_alignment(component)
+    alignments = []
+    alignments << " align=\"#{component.attr('align')}\""   if component.attribute('align')
+    alignments << " valign=\"#{component.attr('valign')}\"" if component.attribute('valign')
+
+    alignments.compact.any? ? alignments.compact.join : nil
   end
 
   def _transform_block_grid(component, inner)
