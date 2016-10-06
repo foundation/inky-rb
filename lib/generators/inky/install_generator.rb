@@ -8,7 +8,7 @@ module Inky
       argument :layout_name, type: :string, default: 'mailer', banner: 'layout_name'
 
       def preserve_original_mailer_layout
-        return nil unless layout_name == 'mailer'
+        return unless layout_name == 'mailer'
 
         original_mailer = File.join(layouts_base_dir, 'mailer.html.erb')
         rename_filename = File.join(layouts_base_dir, "old_mailer_#{Time.now.to_i}.html.erb")

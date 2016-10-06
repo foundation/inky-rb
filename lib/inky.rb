@@ -70,7 +70,7 @@ module Inky
         str = str.sub("###RAW#{i}###", val)
       end
       # If we're in rails, these should be considered safe strings
-      return str.html_safe if str.respond_to?(:html_safe)
+      str = str.html_safe if str.respond_to?(:html_safe)
       str
     end
   end
