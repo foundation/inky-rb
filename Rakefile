@@ -8,3 +8,7 @@ begin
   RSpec::Core::RakeTask.new(:spec)
 rescue LoadError
 end
+
+task test_all: [:spec, :rubocop]
+
+task default: :test_all
