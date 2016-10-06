@@ -1,6 +1,6 @@
 # Inky
 
-[![Gem Version](https://badge.fury.io/rb/inky-rb.svg)](https://badge.fury.io/rb/inky-rb)
+[![Gem Version](https://badge.fury.io/rb/inky-rb.svg)](https://badge.fury.io/rb/inky-rb) [![Build Status](https://travis-ci.org/zurb/inky-rb.svg?branch=master)](https://travis-ci.org/zurb/inky-rb)
 
 Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for [Foundation for Emails](http://foundation.zurb.com/emails), a responsive email framework from [ZURB](http://zurb.com).
 
@@ -101,3 +101,10 @@ Here are the names of the defaults:
 ## Programmatic Use
 
 The Inky parser can be accessed directly for programmatic use.
+
+## Requirements
+
+Inky-rb currently requires:
+
+* Ruby 2.0+
+* Rails 3, 4 or 5

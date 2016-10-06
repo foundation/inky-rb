@@ -2,7 +2,7 @@ sudo: false
 language: ruby
 rvm:
   - 2.0.0
-  - 2.2
+  - 2.2.5
 gemfile:
   - gemfiles/rails_3.gemfile
   - gemfiles/rails_4.gemfile
