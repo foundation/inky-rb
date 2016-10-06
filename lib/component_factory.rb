@@ -124,10 +124,10 @@ module ComponentFactory
     if size_sm || size_lg
       html = ''
       if size_sm
-        html += %{<table class="#{classes.join(' ')} hide-for-large"><tbody><tr><td height="#{size_sm}px" style="font-size:#{size_sm}px;line-height:#{size_sm}px;">&#xA0;</td></tr></tbody></table>}
+        html << %{<table class="#{classes.join(' ')} hide-for-large"><tbody><tr><td height="#{size_sm}px" style="font-size:#{size_sm}px;line-height:#{size_sm}px;">&#xA0;</td></tr></tbody></table>}
       end
       if size_lg
-        html += %{<table class="#{classes.join(' ')} show-for-large"><tbody><tr><td height="#{size_lg}px" style="font-size:#{size_lg}px;line-height:#{size_lg}px;">&#xA0;</td></tr></tbody></table>}
+        html << %{<table class="#{classes.join(' ')} show-for-large"><tbody><tr><td height="#{size_lg}px" style="font-size:#{size_lg}px;line-height:#{size_lg}px;">&#xA0;</td></tr></tbody></table>}
       end
       if size_sm && size_lg
         html = "<span>#{html}</span>"
