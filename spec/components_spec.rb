@@ -2,14 +2,14 @@ require 'spec_helper'
 
 RSpec.describe "Center" do
   it "applies a text-center class and center alignment attribute to the first child" do
-    input = '<center><div></div></center>';
+    input = '<center><div></div></center>'
     expected = <<-HTML
       <center>
         <div align="center" class="float-center"></div>
       </center>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 
   it "doesn't choke if center tags are nested" do
@@ -23,7 +23,7 @@ RSpec.describe "Center" do
       </center>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 
   it "applies the class float-center to <item> elements" do
@@ -47,13 +47,13 @@ RSpec.describe "Center" do
       </center>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 end
 
 RSpec.describe "Button" do
   it "creates a simple button" do
-    input = '<button href="http://zurb.com">Button</button>';
+    input = '<button href="http://zurb.com">Button</button>'
     expected = <<-HTML
       <table class="button">
         <tr>
@@ -67,7 +67,7 @@ RSpec.describe "Button" do
         </tr>
       </table>
     HTML
-    compare(input, expected);
+    compare(input, expected)
   end
 
   it 'creates a button with target="_blank" attribute' do
@@ -224,7 +224,7 @@ end
 
 RSpec.describe "Callout" do
   it "creates a callout with correct syntax" do
-    input = '<callout>Callout</callout>';
+    input = '<callout>Callout</callout>'
     expected = <<-HTML
       <table class="callout">
         <tr>
@@ -234,7 +234,7 @@ RSpec.describe "Callout" do
       </table>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 
   it "copies classes to the final HTML" do
@@ -248,13 +248,13 @@ RSpec.describe "Callout" do
       </table>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 end
 
 RSpec.describe "Spacer" do
   it 'creates a spacer element with correct size' do
-    input = '<spacer size="10"></spacer>';
+    input = '<spacer size="10"></spacer>'
     expected = <<-HTML
       <table class="spacer">
         <tbody>
@@ -265,7 +265,7 @@ RSpec.describe "Spacer" do
       </table>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 
   it 'creates a spacer element for small screens with correct size' do
@@ -334,7 +334,7 @@ RSpec.describe "Spacer" do
       </table>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 end
 
@@ -349,7 +349,7 @@ RSpec.describe "Wrapper" do
       </table>
     HTML
 
-    compare(input, expected);
+    compare(input, expected)
   end
 end
 

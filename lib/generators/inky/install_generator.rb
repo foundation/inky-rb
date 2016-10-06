@@ -5,14 +5,14 @@ module Inky
     class InstallGenerator < ::Rails::Generators::Base
       desc 'Install Foundation for Emails'
       source_root File.join(File.dirname(__FILE__), 'templates')
-      argument :layout_name, :type => :string, :default => 'mailer', :banner => 'layout_name'
+      argument :layout_name, type: :string, default: 'mailer', banner: 'layout_name'
 
       def preserve_original_mailer_layout
         return nil unless layout_name == 'mailer'
 
         original_mailer = File.join(layouts_base_dir, 'mailer.html.erb')
         rename_filename = File.join(layouts_base_dir, "old_mailer_#{Time.now.to_i}.html.erb")
-        File.rename(original_mailer, rename_filename) if File.exists? original_mailer
+        File.rename(original_mailer, rename_filename) if File.exist? original_mailer
       end
 
       def create_mailer_stylesheet

@@ -21,27 +21,22 @@ module Inky
         menu_item: 'item'
       }.merge(options[:components] || {})
 
-      self.component_lookup = self.components.invert
+      self.component_lookup = components.invert
 
       self.column_count = options[:column_count] || 12
 
-      self.component_tags = self.components.values
+      self.component_tags = components.values
     end
-
 
     def release_the_kraken(xml_string)
       xml_string = xml_string.gsub(/doctype/i, 'DOCTYPE')
       raws, str = Inky::Core.extract_raws(xml_string)
       xml_doc = Nokogiri::XML(str)
-      if self.components_exist?(xml_doc)
-        self.transform_doc(xml_doc.root)
-      end
-      str = xml_doc.to_s
-      return Inky::Core.re_inject_raws(str, raws)
+      transform_doc(xml_doc.root) if components_exist?(xml_doc)
+      Inky::Core.re_inject_raws(xml_doc.to_s, raws)
     end
 
-
-    def components_exist?(xml_doc)
+    def components_exist?(_xml_doc)
       true
     end
 
@@ -50,7 +45,7 @@ module Inky
         elem.children.each do |child|
           transform_doc(child)
         end
-        component = self.component_factory(elem)
+        component = component_factory(elem)
         elem.replace(component) if component
       end
       elem
@@ -59,15 +54,15 @@ module Inky
     def self.extract_raws(string)
       raws = []
       i = 0
-      regex = /\< *raw *\>(.*?)\<\/ *raw *\>/i;
+      regex = %r(< *raw *>(.*?)</ *raw *>)
       str = string
       while raw = str.match(regex)
         raws[i] = raw[1]
         str = str.sub(regex, "###RAW#{i}###")
-        i = i + 1
+        i += 1
       end
-      return [raws, str]
-     end
+      [raws, str]
+    end
 
     def self.re_inject_raws(string, raws)
       str = string
@@ -75,11 +70,8 @@ module Inky
         str = str.sub("###RAW#{i}###", val)
       end
       # If we're in rails, these should be considered safe strings
-      if str.respond_to?(:html_safe)
-        return str.html_safe
-      else
-        return str
-      end
+      return str.html_safe if str.respond_to?(:html_safe)
+      str
     end
   end
 end
