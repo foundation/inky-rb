@@ -20,8 +20,8 @@ module ComponentFactory
 
   def _class_array(elem, defaults = [])
     attribute = elem.attribute('class')
-    return defaults.uniq unless attribute
-    defaults.concat(attribute.value.split(' '))
+    defaults.concat(attribute.value.split(' ')) if attribute
+    defaults
   end
 
   def _target_attribute(elem)
