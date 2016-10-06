@@ -18,12 +18,12 @@ module ComponentFactory
   end
 
   def _has_class(elem, klass)
-    elem.attribute('class') && elem.attribute('class').value.include?(klass)
+    (elem.attr('class') || '').include?(klass)
   end
 
   def _class_array(elem, defaults = [])
-    attribute = elem.attribute('class')
-    defaults.concat(attribute.value.split(' ')) if attribute
+    classes = elem['class']
+    defaults.concat(classes.split(' ')) if classes
     defaults
   end
 
@@ -70,8 +70,8 @@ module ComponentFactory
   def _transform_columns(component, inner)
     col_count = component.parent.elements.size
 
-    small_val = component.attr('small') if component.attribute('small')
-    large_val = component.attr('large') if component.attribute('large')
+    small_val = component.attr('small')
+    large_val = component.attr('large')
 
     small_size = small_val || column_count
     large_size = large_val || small_val || (column_count / col_count).to_i
