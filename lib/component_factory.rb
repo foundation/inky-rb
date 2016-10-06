@@ -32,20 +32,14 @@ module ComponentFactory
     expand = _has_class(component, 'expand')
     if component.attr('href')
       target = _target_attribute(component)
-      inner = if expand
-                %{<a href="#{component.attr('href')}"#{target} align="center" class="float-center">#{inner}</a>}
-              else
-                %{<a href="#{component.attr('href')}"#{target}>#{inner}</a>}
-              end
+      extra = ' align="center" class="float-center"' if expand
+      inner = %{<a href="#{component.attr('href')}"#{target}#{extra}>#{inner}</a>}
     end
     inner = "<center>#{inner}</center>" if expand
 
     classes = _class_array(component, ['button'])
-    if expand
-      %{<table class="#{classes.join(' ')}"><tr><td><table><tr><td>#{inner}</td></tr></table></td><td class="expander"></td></tr></table>}
-    else
-      %{<table class="#{classes.join(' ')}"><tr><td><table><tr><td>#{inner}</td></tr></table></td></tr></table>}
-    end
+    expander = '<td class="expander"></td>' if expand
+    %{<table class="#{classes.join(' ')}"><tr><td><table><tr><td>#{inner}</td></tr></table></td>#{expander}</tr></table>}
   end
 
   def _transform_menu(component, inner)
@@ -118,16 +112,17 @@ module ComponentFactory
 
   def _transform_spacer(component, _inner)
     classes = _class_array(component, ['spacer'])
+    build_table = ->(size, extra) { %{<table class="#{classes.join(' ')} #{extra}"><tbody><tr><td height="#{size}px" style="font-size:#{size}px;line-height:#{size}px;">&#xA0;</td></tr></tbody></table>} }
     size = component.attr('size')
     size_sm = component.attr('size-sm')
     size_lg = component.attr('size-lg')
     if size_sm || size_lg
       html = ''
       if size_sm
-        html << %{<table class="#{classes.join(' ')} hide-for-large"><tbody><tr><td height="#{size_sm}px" style="font-size:#{size_sm}px;line-height:#{size_sm}px;">&#xA0;</td></tr></tbody></table>}
+        html << build_table[size_sm, 'hide-for-large']
       end
       if size_lg
-        html << %{<table class="#{classes.join(' ')} show-for-large"><tbody><tr><td height="#{size_lg}px" style="font-size:#{size_lg}px;line-height:#{size_lg}px;">&#xA0;</td></tr></tbody></table>}
+        html << build_table[size_lg, 'show-for-large']
       end
       if size_sm && size_lg
         html = "<span>#{html}</span>"
@@ -135,7 +130,7 @@ module ComponentFactory
       html
     else
       size ||= 16
-      %{<table class="#{classes.join(' ')}"><tbody><tr><td height="#{size}px" style="font-size:#{size}px;line-height:#{size}px;">&#xA0;</td></tr></tbody></table>}
+      build_table[size, nil]
     end
   end
 
