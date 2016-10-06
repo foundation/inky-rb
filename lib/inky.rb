@@ -1,6 +1,6 @@
 module Inky
   class Core
-    require 'rexml/document'
+    require 'nokogiri'
     require 'component_factory'
     attr_accessor :components, :column_count, :component_lookup, :component_tags
 
@@ -32,7 +32,7 @@ module Inky
     def release_the_kraken(xml_string)
       xml_string = xml_string.gsub(/doctype/i, 'DOCTYPE')
       raws, str = Inky::Core.extract_raws(xml_string)
-      xml_doc = REXML::Document.new(str)
+      xml_doc = Nokogiri::XML(str)
       if self.components_exist?(xml_doc)
         self.transform_doc(xml_doc.root)
       end
@@ -51,7 +51,7 @@ module Inky
           transform_doc(child)
         end
         component = self.component_factory(elem)
-        elem.replace_with(component) if component
+        elem.replace(component) if component
       end
       elem
     end
@@ -74,7 +74,12 @@ module Inky
       raws.each_with_index do |val, i|
         str = str.sub("###RAW#{i}###", val)
       end
-      return str
+      # If we're in rails, these should be considered safe strings
+      if str.respond_to?(:html_safe)
+        return str.html_safe
+      else
+        return str
+      end
     end
   end
 end

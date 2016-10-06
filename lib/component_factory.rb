@@ -4,7 +4,7 @@ module ComponentFactory
     # TODO:  Handle changed names
     transform_method = :"_transform_#{self.component_lookup[elem.name]}"
     if self.respond_to?(transform_method)
-      REXML::Document.new(self.send(transform_method, elem, inner)).root
+      Nokogiri::XML(self.send(transform_method, elem, inner)).root
     else
       nil
     end
@@ -22,11 +22,13 @@ module ComponentFactory
   end
 
   def _has_class(elem, klass)
-    !!elem.attributes['class'] && elem.attributes['class'].split(' ').include?(klass)
+    !!elem.attribute('class') && elem.attribute('class').value.include?(klass)
   end
 
   def _class_array(elem, defaults = [])
-    (elem.attributes['class'] ? (defaults.concat(elem.attributes['class'].split(' '))) : defaults).uniq
+    attribute = elem.attribute('class')
+    return defaults.uniq unless attribute
+    defaults.concat(attribute.value.split(' '))
   end
 
   def _target_attribute(elem)
@@ -78,8 +80,12 @@ module ComponentFactory
   def _transform_columns(component, inner)
 
     col_count = component.parent.elements.size
-    small_size = component.attributes['small'] || self.column_count
-    large_size = component.attributes['large'] || component.attributes['small'] || (self.column_count / col_count).to_i
+
+    small_val = component.attribute('small') ? component.attribute('small').value : nil
+    large_val = component.attribute('large') ? component.attribute('large').value : nil
+
+    small_size = small_val || self.column_count
+    large_size = large_val || small_val || (self.column_count / col_count).to_i
 
     classes = _class_array(component, ["small-#{small_size}", "large-#{large_size}", "columns"])
 
@@ -87,7 +93,7 @@ module ComponentFactory
     classes.push('first') unless component.previous_element
     classes.push('last') unless component.next_element
 
-    subrows = component.elements.to_a("//*[contains(@class,'row')]").concat(component.elements.to_a("//row"))
+    subrows = component.elements.css(".row").to_a.concat(component.elements.css("row").to_a)
     expander = ''
     if large_size.to_i == self.column_count && subrows.size == 0
       expander = "<th class=\"expander\"></th>"
@@ -104,13 +110,13 @@ module ComponentFactory
     # NOTE:  Using children instead of elements because elements.to_a
     # sometimes appears to miss elements that show up in size
     component.elements.to_a.each do |child|
-      child.add_attribute('align', 'center')
+      child['align'] = 'center'
       child_classes = _class_array(child, ['float-center'])
-      child.add_attribute('class', child_classes.join(' '))
-      items = component.elements.to_a("//*[contains(@class,'menu-item')]").concat(component.elements.to_a("//item"))
+      child['class'] = child_classes.join(' ')
+      items = component.elements.css(".menu-item").to_a.concat(component.elements.css("item").to_a)
       items.each do |item|
         item_classes = _class_array(item, ['float-center'])
-        item.add_attribute('class', item_classes.join(' '))
+        item['class'] = item_classes.join(' ')
       end
     end
     return component.to_s
