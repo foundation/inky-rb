@@ -269,6 +269,23 @@ RSpec.describe 'Grid' do
 
     compare(input, expected)
   end
+
+  it 'transfers attributes like valign' do
+    input = '<columns small="6" valign="middle" foo="bar">x</columns>'
+    expected = <<-HTML
+      <th class="small-6 large-6 columns first last" valign="middle" foo="bar">
+        <table>
+          <tr>
+            <th>
+              x
+            </th>
+          </tr>
+        </table>
+      </th>
+    HTML
+
+    compare(input, expected)
+  end
 end
 
 RSpec.describe 'Block Grid' do

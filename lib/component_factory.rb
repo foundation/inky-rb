@@ -98,7 +98,7 @@ module ComponentFactory
     if large_size.to_i == self.column_count && subrows.size == 0
       expander = "<th class=\"expander\"></th>"
     end
-    "<th class=\"#{classes.join(' ')}\"><table><tr><th>#{inner}</th>#{expander}</tr></table></th>"
+    "<th class=\"#{classes.join(' ')}\" #{_pass_through_attributes(component)}><table><tr><th>#{inner}</th>#{expander}</tr></table></th>"
   end
 
   def _transform_block_grid(component, inner)
