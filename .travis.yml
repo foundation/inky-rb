@@ -1,0 +1,16 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.0.0
+  - 2.2
+gemfile:
+  - gemfiles/rails_3.gemfile
+  - gemfiles/rails_4.gemfile
+  - gemfiles/rails_5.gemfile
+matrix:
+  exclude:
+  - rvm: 2.0.0
+    gemfile: gemfiles/rails_5.gemfile
+before_install:
+  - gem install bundler
+  - 'npm install -g inky-cli'
