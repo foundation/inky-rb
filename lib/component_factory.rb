@@ -7,9 +7,12 @@ module ComponentFactory
     Nokogiri::XML(send(transform_method, elem, inner)).root
   end
 
+  tags = %w[class id href size large no-expander small target]
+  tags = tags.to_set if tags.respond_to? :to_set
+  IGNORED_ON_PASSTHROUGH = tags.freeze
+
   def _pass_through_attributes(elem)
-    ignored = ['class', 'id', 'href', 'size', 'large', 'no-expander', 'small', 'target']
-    elem.attributes.reject { |e| ignored.include?(e.downcase) }.map do |name, value|
+    elem.attributes.reject { |e| IGNORED_ON_PASSTHROUGH.include?(e.downcase) }.map do |name, value|
       %{#{name}="#{value}" }
     end.join
   end
