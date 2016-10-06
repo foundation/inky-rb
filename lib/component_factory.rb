@@ -95,7 +95,7 @@ module ComponentFactory
   def _transform_center(component, _inner)
     # NOTE:  Using children instead of elements because elements.to_a
     # sometimes appears to miss elements that show up in size
-    component.elements.to_a.each do |child|
+    component.elements.each do |child|
       child['align'] = 'center'
       child_classes = _class_array(child, ['float-center'])
       child['class'] = child_classes.join(' ')
