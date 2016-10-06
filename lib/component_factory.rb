@@ -118,19 +118,12 @@ module ComponentFactory
     size_lg = component.attr('size-lg')
     if size_sm || size_lg
       html = ''
-      if size_sm
-        html << build_table[size_sm, 'hide-for-large']
-      end
-      if size_lg
-        html << build_table[size_lg, 'show-for-large']
-      end
-      if size_sm && size_lg
-        html = "<span>#{html}</span>"
-      end
+      html << build_table[size_sm, 'hide-for-large'] if size_sm
+      html << build_table[size_lg, 'show-for-large'] if size_lg
+      html = "<span>#{html}</span>" if size_sm && size_lg
       html
     else
-      size ||= 16
-      build_table[size, nil]
+      build_table[size || 16, nil]
     end
   end
 
