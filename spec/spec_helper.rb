@@ -7,6 +7,10 @@ def reformat_html(html)
     .gsub(%r{<(\w+)([^>]*)>\n</\1>}, '<\1\2/>') # Auto close empty tags, e.g. <hr>\n</hr> => <hr/>
     .gsub(/ "/, '"').gsub(/\=" /, '="')         # Remove leading/trailing spaces inside attributes
     .gsub(/ </, '<').gsub(/> /, '>')            # Remove leading/trailing spaces inside tags
+    .gsub(/class\="([^"]+)"/) do                # Sort class names
+      classes = $1.split(' ').sort.join(' ')
+      %{class="#{classes}"}
+    end
 end
 
 def compare(input, expected)
