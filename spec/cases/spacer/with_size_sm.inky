@@ -1,0 +1,5 @@
+<div>
+  Stuff on top
+  <spacer class="some classes" foo="bar" size-sm="42"></spacer>
+  Stuff on bottom
+</div>

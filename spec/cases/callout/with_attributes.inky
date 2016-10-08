@@ -1,0 +1,5 @@
+<!-- pending -->
+
+<callout class="some klasses" foo="bar">
+  <p>I'm in a callout!</p>
+</callout>

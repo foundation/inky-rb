@@ -1,0 +1,8 @@
+<!-- pending -->
+
+<callout>
+Hello
+<br/>
+Here's an image:
+<img src="http://www.example.com" width="400" height="200"/>
+</callout>

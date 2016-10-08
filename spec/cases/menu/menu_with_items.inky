@@ -1,0 +1,5 @@
+<menu class="small-vertical">
+  <item href="http://example.com/1">An item</item>
+  <item href="http://example.com/2">Another Item</item>
+  <item href="http://example.com/3">Last Item</item>
+</menu>
