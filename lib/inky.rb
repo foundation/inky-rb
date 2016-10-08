@@ -33,7 +33,9 @@ module Inky
       raws, str = Inky::Core.extract_raws(xml_string)
       xml_doc = Nokogiri::XML(str)
       transform_doc(xml_doc.root) if components_exist?(xml_doc)
-      Inky::Core.re_inject_raws(xml_doc.to_s, raws)
+      string = xml_doc.to_s
+      string.sub!(/^<\?xml.*\?>\n/, '')
+      Inky::Core.re_inject_raws(string, raws)
     end
 
     def components_exist?(_xml_doc)
