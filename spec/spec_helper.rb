@@ -1,5 +1,14 @@
 require 'inky'
 
+def reformat_html(html)
+  html
+    .gsub(/\s+/, ' ')                           # Compact all whitespace to a single space
+    .gsub(/> *</, ">\n<")                       # Use returns between tags
+    .gsub(%r{<(\w+)([^>]*)>\n</\1>}, '<\1\2/>') # Auto close empty tags, e.g. <hr>\n</hr> => <hr/>
+    .gsub(/ "/, '"').gsub(/\=" /, '="')         # Remove leading/trailing spaces inside attributes
+    .gsub(/ </, '<').gsub(/> /, '>')            # Remove leading/trailing spaces inside tags
+end
+
 def compare(input, expected)
   inky = Inky::Core.new
   output = inky.release_the_kraken(input)
@@ -7,7 +16,5 @@ def compare(input, expected)
   # TODO:  Figure out a better way to do html compare in ruby..
   # this is overly dependent on things like class ordering, making it
   # fragile
-  output_str = Nokogiri::XML(output).to_s.gsub(/\s/, '')
-  expected_str = Nokogiri::XML(expected).to_s.gsub(/\s/, '')
-  expect(output_str).to eql(expected_str)
+  expect(reformat_html(output)).to eql(reformat_html(expected))
 end
