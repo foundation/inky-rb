@@ -49,8 +49,8 @@ module ComponentFactory
   end
 
   def _transform_menu(component, inner)
-    classes = _combine_classes(component, 'menu')
-    %{<table class="#{classes}"><tr><td><table><tr>#{inner}</tr></table></td></tr></table>}
+    attributes = _combine_attributes(component, 'menu')
+    %{<table #{attributes}><tr><td><table><tr>#{inner}</tr></table></td></tr></table>}
   end
 
   def _transform_menu_item(component, inner)
