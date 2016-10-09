@@ -64,7 +64,8 @@ module ComponentFactory
   end
 
   def _transform_row(component, inner)
-    %{<table #{_combine_attributes(component, 'row')}><tbody><tr>#{inner}</tr></tbody></table>}
+    attributes = _combine_attributes(component, 'row')
+    %{<table #{attributes}><tbody><tr>#{inner}</tr></tbody></table>}
   end
 
   # in inky.js this is factored out into makeClumn.  TBD if we need that here.
@@ -109,7 +110,8 @@ module ComponentFactory
 
   def _transform_callout(component, inner)
     classes = _combine_classes(component, 'callout-inner')
-    %{<table class="callout"><tr><th class="#{classes}">#{inner}</th><th class="expander"></th></tr></table>}
+    attributes = _pass_through_attributes(component)
+    %{<table #{attributes}class="callout"><tr><th class="#{classes}">#{inner}</th><th class="expander"></th></tr></table>}
   end
 
   def _transform_spacer(component, _inner)
