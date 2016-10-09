@@ -132,7 +132,7 @@ module ComponentFactory
   end
 
   def _transform_wrapper(component, inner)
-    classes = _combine_classes(component, 'wrapper')
-    %{<table class="#{classes}" align="center"><tr><td class="wrapper-inner">#{inner}</td></tr></table>}
+    attributes = _combine_attributes(component, 'wrapper')
+    %{<table #{attributes} align="center"><tr><td class="wrapper-inner">#{inner}</td></tr></table>}
   end
 end
