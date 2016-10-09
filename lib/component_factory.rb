@@ -21,10 +21,8 @@ module ComponentFactory
     (elem.attr('class') || '').include?(klass)
   end
 
-  def _class_array(elem, defaults = [])
-    classes = elem['class']
-    defaults.concat(classes.split(' ')) if classes
-    defaults
+  def _class_array(elem, extra_classes)
+    [elem['class'], extra_classes].join(' ')
   end
 
   def _target_attribute(elem)
@@ -40,13 +38,13 @@ module ComponentFactory
     end
     inner = "<center>#{inner}</center>" if expand
 
-    classes = _class_array(component, ['button'])
+    classes = _class_array(component, 'button')
     expander = '<td class="expander"></td>' if expand
     %{<table class="#{classes.join(' ')}"><tr><td><table><tr><td>#{inner}</td></tr></table></td>#{expander}</tr></table>}
   end
 
   def _transform_menu(component, inner)
-    classes = _class_array(component, ['menu'])
+    classes = _class_array(component, 'menu')
     %{<table class="#{classes.join(' ')}"><tr><td><table><tr>#{inner}</tr></table></td></tr></table>}
   end
 
@@ -56,12 +54,12 @@ module ComponentFactory
   end
 
   def _transform_container(component, inner)
-    classes = _class_array(component, ['container'])
+    classes = _class_array(component, 'container')
     %{<table class="#{classes.join(' ')}"><tbody><tr><td>#{inner}</td></tr></tbody></table>}
   end
 
   def _transform_row(component, inner)
-    classes = _class_array(component, ['row'])
+    classes = _class_array(component, 'row')
     attrs = _pass_through_attributes(component)
     %{<table #{attrs}class="#{classes.join(' ')}"><tbody><tr>#{inner}</tr></tbody></table>}
   end
@@ -76,7 +74,7 @@ module ComponentFactory
     small_size = small_val || column_count
     large_size = large_val || small_val || (column_count / col_count).to_i
 
-    classes = _class_array(component, ["small-#{small_size}", "large-#{large_size}", "columns"])
+    classes = _class_array(component, "small-#{small_size} large-#{large_size} columns")
 
     classes.push('first') unless component.previous_element
     classes.push('last') unless component.next_element
@@ -88,7 +86,7 @@ module ComponentFactory
   end
 
   def _transform_block_grid(component, inner)
-    classes = _class_array(component, ['block-grid', "up-#{component.attr('up')}"])
+    classes = _class_array(component, "block-grid up-#{component.attr('up')}")
     %{<table class="#{classes.join(' ')}"><tr>#{inner}</tr></table>}
   end
 
@@ -97,11 +95,11 @@ module ComponentFactory
     # sometimes appears to miss elements that show up in size
     component.elements.each do |child|
       child['align'] = 'center'
-      child_classes = _class_array(child, ['float-center'])
+      child_classes = _class_array(child, 'float-center')
       child['class'] = child_classes.join(' ')
       items = component.elements.css(".menu-item").to_a.concat(component.elements.css("item").to_a)
       items.each do |item|
-        item_classes = _class_array(item, ['float-center'])
+        item_classes = _class_array(item, 'float-center')
         item['class'] = item_classes.join(' ')
       end
     end
@@ -109,12 +107,12 @@ module ComponentFactory
   end
 
   def _transform_callout(component, inner)
-    classes = _class_array(component, ['callout-inner'])
+    classes = _class_array(component, 'callout-inner')
     %{<table class="callout"><tr><th class="#{classes.join(' ')}">#{inner}</th><th class="expander"></th></tr></table>}
   end
 
   def _transform_spacer(component, _inner)
-    classes = _class_array(component, ['spacer'])
+    classes = _class_array(component, 'spacer')
     build_table = ->(size, extra) { %{<table class="#{classes.join(' ')} #{extra}"><tbody><tr><td height="#{size}px" style="font-size:#{size}px;line-height:#{size}px;">&#xA0;</td></tr></tbody></table>} }
     size = component.attr('size')
     size_sm = component.attr('size-sm')
@@ -131,7 +129,7 @@ module ComponentFactory
   end
 
   def _transform_wrapper(component, inner)
-    classes = _class_array(component, ['wrapper'])
+    classes = _class_array(component, 'wrapper')
     %{<table class="#{classes.join(' ')}" align="center"><tr><td class="wrapper-inner">#{inner}</td></tr></table>}
   end
 end
