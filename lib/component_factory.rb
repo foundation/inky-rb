@@ -25,6 +25,11 @@ module ComponentFactory
     [elem['class'], extra_classes].join(' ')
   end
 
+  def _combine_attributes(elem, extra_classes = nil)
+    classes = _combine_classes(elem, extra_classes)
+    [_pass_through_attributes(elem), classes && %{class="#{classes}"}].join
+  end
+
   def _target_attribute(elem)
     elem.attributes['target'] ? %{ target="#{elem.attributes['target']}"} : ''
   end
@@ -59,9 +64,7 @@ module ComponentFactory
   end
 
   def _transform_row(component, inner)
-    classes = _combine_classes(component, 'row')
-    attrs = _pass_through_attributes(component)
-    %{<table #{attrs}class="#{classes}"><tbody><tr>#{inner}</tr></tbody></table>}
+    %{<table #{_combine_attributes(component, 'row')}><tbody><tr>#{inner}</tr></tbody></table>}
   end
 
   # in inky.js this is factored out into makeClumn.  TBD if we need that here.
