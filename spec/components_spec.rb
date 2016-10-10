@@ -356,7 +356,7 @@ end
 RSpec.describe "raw" do
   it 'creates a wrapper that ignores anything inside' do
     input = "<body><raw><<LCG ProgramTG LCG Coupon Code Default='246996'>></raw></body>"
-    expected = "<body><<LCG ProgramTG LCG Coupon Code Default='246996'>></body>\n"
+    expected = "<body><<LCG ProgramTG LCG Coupon Code Default='246996'>></body>"
 
     # Can't do vanilla compare because the second will fail to parse
     inky = Inky::Core.new

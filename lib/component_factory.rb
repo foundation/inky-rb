@@ -4,7 +4,7 @@ module ComponentFactory
     # TODO:  Handle changed names
     transform_method = :"_transform_#{component_lookup[elem.name]}"
     return unless respond_to?(transform_method)
-    Nokogiri::XML(send(transform_method, elem, inner)).root
+    send(transform_method, elem, inner)
   end
 
   tags = %w[class id href size large no-expander small target]
