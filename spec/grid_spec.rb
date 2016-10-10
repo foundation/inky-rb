@@ -18,7 +18,7 @@ RSpec.describe "Container" do
   it 'works when parsing a full HTML document' do
     input = <<-INKY
       <!doctype html> <html>
-        <head></head>
+        <head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"></head>
         <body>
           <container></container>
         </body>
@@ -27,7 +27,7 @@ RSpec.describe "Container" do
     expected = <<-HTML
       <!DOCTYPE html>
       <html>
-        <head></head>
+        <head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"></head>
         <body>
           <table class="container">
             <tbody>

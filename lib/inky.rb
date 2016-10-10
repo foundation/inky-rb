@@ -31,15 +31,13 @@ module Inky
     def release_the_kraken(xml_string)
       xml_string = xml_string.gsub(/doctype/i, 'DOCTYPE')
       raws, str = Inky::Core.extract_raws(xml_string)
-      xml_doc = Nokogiri::XML(str)
-      transform_doc(xml_doc.root) if components_exist?(xml_doc)
-      string = xml_doc.to_s
-      string.sub!(/^<\?xml.*\?>\n/, '')
+      parse_cmd = str =~ /<html/i ? :parse : :fragment
+      html = Nokogiri::HTML.public_send(parse_cmd, str)
+      html.elements.each do |elem|
+        transform_doc(elem)
+      end
+      string = html.to_html(encoding: 'US-ASCII')
       Inky::Core.re_inject_raws(string, raws)
-    end
-
-    def components_exist?(_xml_doc)
-      true
     end
 
     def transform_doc(elem)
