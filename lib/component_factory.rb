@@ -55,7 +55,8 @@ module ComponentFactory
 
   def _transform_menu_item(component, inner)
     target = _target_attribute(component)
-    %{<th class="menu-item"><a href="#{component.attr('href')}"#{target}>#{inner}</a></th>}
+    attributes = _combine_attributes(component, 'menu-item')
+    %{<th #{attributes}><a href="#{component.attr('href')}"#{target}>#{inner}</a></th>}
   end
 
   def _transform_container(component, inner)
