@@ -18,7 +18,7 @@ module ComponentFactory
   end
 
   def _has_class(elem, klass)
-    (elem.attr('class') || '').include?(klass)
+    elem.attr('class') =~ /(^|\s)#{klass}($|\s)/
   end
 
   def _combine_classes(elem, extra_classes)

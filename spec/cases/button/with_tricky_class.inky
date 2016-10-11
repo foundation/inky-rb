@@ -1,5 +1,19 @@
-<!-- pending -->
-
 <button href="http://example.com" class="noexpand">
+  A label
+</button>
+
+<button href="http://example.com" class="expand-niet">
+  A label
+</button>
+
+<button href="http://example.com" class="expand foo">
+  A label
+</button>
+
+<button href="http://example.com" class="foo expand">
+  A label
+</button>
+
+<button href="http://example.com" class="foo expand bar">
   A label
 </button>
