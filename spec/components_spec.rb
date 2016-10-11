@@ -301,7 +301,6 @@ RSpec.describe "Spacer" do
   it 'creates a spacer element for small and large screens with correct sizes' do
     input = '<spacer size-sm="10" size-lg="20"></spacer>'
     expected = <<-HTML
-      <span>
         <table class="spacer hide-for-large">
           <tbody>
             <tr>
@@ -316,7 +315,6 @@ RSpec.describe "Spacer" do
             </tr>
           </tbody>
         </table>
-      </span>
     HTML
 
     compare(input, expected)
