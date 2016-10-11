@@ -60,8 +60,8 @@ module ComponentFactory
   end
 
   def _transform_container(component, inner)
-    classes = _combine_classes(component, 'container')
-    %{<table class="#{classes}"><tbody><tr><td>#{inner}</td></tr></tbody></table>}
+    attributes = _combine_attributes(component, 'container')
+    %{<table #{attributes} align="center"><tbody><tr><td>#{inner}</td></tr></tbody></table>}
   end
 
   def _transform_row(component, inner)

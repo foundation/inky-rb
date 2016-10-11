@@ -4,7 +4,7 @@ RSpec.describe "Container" do
   it "creates a container table" do
     input = '<container></container>'
     expected = <<-HTML
-      <table class="container">
+      <table class="container" align="center">
         <tbody>
           <tr>
             <td></td>
@@ -29,7 +29,7 @@ RSpec.describe "Container" do
       <html>
         <head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"></head>
         <body>
-          <table class="container">
+          <table class="container" align="center">
             <tbody>
               <tr>
                 <td></td>
