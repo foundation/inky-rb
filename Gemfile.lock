@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    inky-rb (1.3.6.3)
+    inky-rb (1.3.7.0)
       foundation_emails (~> 2)
       nokogiri
 
@@ -10,14 +10,12 @@ GEM
   specs:
     ast (2.3.0)
     diff-lcs (1.2.5)
-    foundation_emails (2.2.0.0)
+    foundation_emails (2.2.1.0)
     mini_portile2 (2.1.0)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     parser (2.3.1.4)
       ast (~> 2.2)
-    pkg-config (1.1.7)
     powerpack (0.1.1)
     rainbow (2.1.0)
     rake (11.2.2)
