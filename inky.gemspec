@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.description = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails, a responsive email framework from ZURB.  '
   s.authors     = ["ZURB"]
   s.email       = ['foundation@zurb.com']
+  s.homepage    = 'https://github.com/zurb/inky-rb'
 
   s.files         = `git ls-files -z`.split("\x0")
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
