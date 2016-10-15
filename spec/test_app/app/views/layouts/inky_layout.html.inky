@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= controller.controller_name %> : <%= controller.action_name %></title>
+</head>
+<body>
+  <container>
+    <%= yield %>
+  </container>
+</body>
+</html>

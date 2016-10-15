@@ -13,12 +13,15 @@ Gem::Specification.new do |s|
 
   s.files         = `git ls-files -z`.split("\x0")
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  s.test_files    = Dir['spec/**/*']
 
   s.add_dependency "foundation_emails", "~> 2"
   s.add_dependency "nokogiri"
   s.add_development_dependency "bundler", "~> 1.6"
   s.add_development_dependency "rake"
-  s.add_development_dependency "rspec"
   s.add_development_dependency "rubocop"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "capybara"
+  s.add_development_dependency "rails"
+  # s.add_development_dependency "pry"
 end
