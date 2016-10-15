@@ -16,12 +16,12 @@ def reformat_html(html)
     end
 end
 
+def expect_same_html(input, expected)
+  expect(reformat_html(input)).to eql(reformat_html(expected))
+end
+
 def compare(input, expected)
   inky = Inky::Core.new
   output = inky.release_the_kraken(input)
-
-  # TODO:  Figure out a better way to do html compare in ruby..
-  # this is overly dependent on things like class ordering, making it
-  # fragile
-  expect(reformat_html(output)).to eql(reformat_html(expected))
+  expect_same_html(output, expected)
 end
