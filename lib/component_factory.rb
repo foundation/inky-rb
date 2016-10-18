@@ -1,9 +1,8 @@
 module ComponentFactory
   def component_factory(elem)
-    inner = elem.children.map(&:to_s).join
-    # TODO:  Handle changed names
     transform_method = :"_transform_#{component_lookup[elem.name]}"
     return unless respond_to?(transform_method)
+    inner = elem.children.map(&:to_s).join
     send(transform_method, elem, inner)
   end
 
