@@ -5,5 +5,5 @@ class InkyController < ApplicationController
     @partial_name = params[:partial].presence
   end
 
-  %w[simple layout slim].each{ |m| define_method(m){} }
+  %w[simple layout slim explicit_slim explicit_builder].each{ |m| define_method(m){} }
 end

@@ -84,4 +84,36 @@ describe 'Rails', type: :feature do
       HTML
     end
   end
+
+  context "for an extension 'inky-<handler>'" do
+    it "works when `handler` is registered after inky (like slim)" do
+      visit "/inky/explicit_slim"
+
+      expect_same_html page.html, <<-HTML
+        <!DOCTYPE html>
+        <html><body>
+          <table class="container" align="center">
+            <tbody><tr><td>
+              Explicit slim example
+            </td></tr></tbody>
+          </table>
+        </body></html>
+      HTML
+    end
+
+    it "works when `handler` is registered after inky (like builder)" do
+      visit "/inky/explicit_builder"
+
+      expect_same_html page.html, <<-HTML
+        <!DOCTYPE html>
+        <html><body>
+          <table class="container" align="center">
+            <tbody><tr><td>
+              Built with builder
+            </td></tr></tbody>
+          </table>
+        </body></html>
+      HTML
+    end
+  end
 end

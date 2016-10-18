@@ -16,10 +16,21 @@ module Inky
         compiled_source = engine_handler.call(template)
         "Inky::Core.new.release_the_kraken(begin; #{compiled_source};end)"
       end
+
+      module Composer
+        def register_template_handler(ext, *)
+          super
+          super :"inky-#{ext}", Inky::Rails::TemplateHandler.new(ext)
+        end
+      end
     end
   end
 end
 
 ActiveSupport.on_load(:action_view) do
+  ActionView::Template.template_handler_extensions.each do |ext|
+    ActionView::Template.register_template_handler :"inky-#{ext}", Inky::Rails::TemplateHandler.new(ext)
+  end
   ActionView::Template.register_template_handler :inky, Inky::Rails::TemplateHandler.new
+  ActionView::Template.singleton_class.send :prepend, Inky::Rails::TemplateHandler::Composer
 end

@@ -73,6 +73,7 @@ welcome.html      => welcome.html.inky
 pw_reset.html.erb => pw_reset.html.inky
 ```
 
+
 You're all set!
 
 ** The majority of email clients ignore linked stylesheets. By using a CSS inliner like `premailer-rails` or `roadie`, you're able to leave your stylesheets in a separate file, keeping your markup lean.
@@ -91,6 +92,13 @@ end
 
 Check [lib/generators/inky/templates/mailer_layout.html.slim](lib/generators/inky/templates/mailer_layout.html.slim)
 for a Slim example.
+
+You may prefer to specify which template engine to use before inky:
+
+```
+welcome.html.haml => welcome.html.inky-haml
+pw_reset.html.erb => pw_reset.html.inky-erb
+```
 
 ## Custom Elements
 
