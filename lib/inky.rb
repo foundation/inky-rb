@@ -29,6 +29,7 @@ module Inky
     end
 
     def release_the_kraken(xml_string)
+      xml_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
       xml_string = xml_string.gsub(/doctype/i, 'DOCTYPE')
       raws, str = Inky::Core.extract_raws(xml_string)
       parse_cmd = str =~ /<html/i ? :parse : :fragment
