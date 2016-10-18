@@ -5,6 +5,7 @@ require_relative "../config/environment.rb"
 require 'capybara/rspec'
 require 'capybara/rails'
 require_relative '../../spec_helper.rb'
+require 'slim'
 
 Rails.backtrace_cleaner.remove_silencers!
 RSpec.configure do |config|
