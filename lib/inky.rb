@@ -28,10 +28,10 @@ module Inky
       self.component_tags = components.values
     end
 
-    def release_the_kraken(xml_string)
-      xml_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
-      xml_string = xml_string.gsub(/doctype/i, 'DOCTYPE')
-      raws, str = Inky::Core.extract_raws(xml_string)
+    def release_the_kraken(html_string)
+      html_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
+      html_string = html_string.gsub(/doctype/i, 'DOCTYPE')
+      raws, str = Inky::Core.extract_raws(html_string)
       parse_cmd = str =~ /<html/i ? :parse : :fragment
       html = Nokogiri::HTML.public_send(parse_cmd, str)
       html.elements.each do |elem|
