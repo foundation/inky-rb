@@ -1,15 +1,23 @@
 require_relative '../helper'
 
+def simple_container(text)
+  <<-HTML
+    <!DOCTYPE html>
+    <html><body>
+      <table class="container" align="center">
+        <tbody><tr><td>
+          #{text}
+        </td></tr></tbody>
+      </table>
+    </body></html>
+  HTML
+end
+
 describe 'Rails', type: :feature do
   it 'will convert .inky views' do
     visit "/inky/simple"
 
-    expect_same_html page.html, <<-HTML
-      <!DOCTYPE html>
-      <html><body>
-      <table class=" container" align="center"><tbody><tr><td>Simplistic example</td></tr></tbody></table>
-      </body></html>
-    HTML
+    expect_same_html page.html, simple_container('Simplistic example')
   end
 
   it "won't convert non .inky view" do
@@ -72,16 +80,7 @@ describe 'Rails', type: :feature do
     it "works for an slim .inky layout" do
       visit "/inky/slim"
 
-      expect_same_html page.html, <<-HTML
-        <!DOCTYPE html>
-        <html><body>
-          <table class="container" align="center">
-            <tbody><tr><td>
-              Slim example
-            </td></tr></tbody>
-          </table>
-        </body></html>
-      HTML
+      expect_same_html page.html, simple_container('Slim example')
     end
   end
 
@@ -89,31 +88,13 @@ describe 'Rails', type: :feature do
     it "works when `handler` is registered after inky (like slim)" do
       visit "/inky/explicit_slim"
 
-      expect_same_html page.html, <<-HTML
-        <!DOCTYPE html>
-        <html><body>
-          <table class="container" align="center">
-            <tbody><tr><td>
-              Explicit slim example
-            </td></tr></tbody>
-          </table>
-        </body></html>
-      HTML
+      expect_same_html page.html, simple_container('Explicit slim example')
     end
 
     it "works when `handler` is registered after inky (like builder)" do
       visit "/inky/explicit_builder"
 
-      expect_same_html page.html, <<-HTML
-        <!DOCTYPE html>
-        <html><body>
-          <table class="container" align="center">
-            <tbody><tr><td>
-              Built with builder
-            </td></tr></tbody>
-          </table>
-        </body></html>
-      HTML
+      expect_same_html page.html, simple_container('Built with builder')
     end
   end
 end
