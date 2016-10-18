@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 RSpec.describe "Configuration" do
+  around do |spec|
+    Inky.configure do |config|
+      old = config.template_engine
+      spec.run
+      config.template_engine = old
+    end
+  end
+
   it "default value is :erb" do
     Inky::Configuration.new.template_engine = :erb
   end

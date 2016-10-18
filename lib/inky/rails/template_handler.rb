@@ -3,7 +3,9 @@ module Inky
     class TemplateHandler
       class << self
         def engine_handler
-          @@engine_handler ||= ActionView::Template.registered_template_handler(::Inky.configuration.template_engine)
+          type = ::Inky.configuration.template_engine
+          ActionView::Template.registered_template_handler(type) ||
+            raise("No template handler found for #{type}")
         end
 
         def call(template)

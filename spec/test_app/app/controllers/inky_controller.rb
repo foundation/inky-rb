@@ -10,4 +10,7 @@ class InkyController < ApplicationController
 
   def layout
   end
+
+  def slim
+  end
 end

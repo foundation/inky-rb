@@ -58,4 +58,30 @@ describe 'Rails', type: :feature do
       </html>
     HTML
   end
+
+  context "when configured to use a different template engine" do
+    around do |spec|
+      Inky.configure do |config|
+        old = config.template_engine
+        config.template_engine = :slim
+        spec.run
+        config.template_engine = old
+      end
+    end
+
+    it "works for an slim .inky layout" do
+      visit "/inky/slim"
+
+      expect_same_html page.html, <<-HTML
+        <!DOCTYPE html>
+        <html><body>
+          <table class="container" align="center">
+            <tbody><tr><td>
+              Slim example
+            </td></tr></tbody>
+          </table>
+        </body></html>
+      HTML
+    end
+  end
 end
