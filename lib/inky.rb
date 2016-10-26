@@ -3,7 +3,7 @@ require 'inky/configuration'
 module Inky
   class Core
     require 'nokogiri'
-    require_relative 'component_factory'
+    require_relative 'inky/component_factory'
     attr_accessor :components, :column_count, :component_lookup, :component_tags
 
     include ComponentFactory
