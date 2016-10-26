@@ -36,9 +36,7 @@ module Inky
       raws, str = Inky::Core.extract_raws(html_string)
       parse_cmd = str =~ /<html/i ? :parse : :fragment
       html = Nokogiri::HTML.public_send(parse_cmd, str)
-      html.children.each do |elem|
-        transform_doc(elem)
-      end
+      transform_doc(html)
       string = html.to_html(encoding: 'US-ASCII')
       Inky::Core.re_inject_raws(string, raws)
     end
