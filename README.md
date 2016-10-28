@@ -62,8 +62,16 @@ Run the following command to set up the required styles and mailer layout:
 rails g inky:install
 ```
 
-(You can specify the generated mailer layout filename like so: `rails g inky:install some_name` and also your prefered
-markup language like: `rails g inky:install mailer_layout slim`)
+You can specify the layout name and templating language with the following options:
+
+```
+Usage:
+  rails generate inky:install [layout_name] [options]
+
+Options:
+  [--haml], [--no-haml]  # Generate layout in Haml
+  [--slim], [--no-slim]  # Generate layout in Slim
+```
 
 Rename your email templates to use the `.inky` file extension. Note that you'll still be able to use your default
 template engine within the `.inky` templates:
