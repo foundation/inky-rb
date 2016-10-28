@@ -6,14 +6,16 @@ module Inky
       desc 'Install Foundation for Emails'
       source_root File.join(File.dirname(__FILE__), 'templates')
       argument :layout_name, type: :string, default: 'mailer', banner: 'layout_name'
-      argument :extension,   type: :string, default: 'erb',    banner: 'extension'
+
+      class_option :haml, desc: "Generate layout in Haml", type: :boolean
+      class_option :slim, desc: "Generate layout in Slim", type: :boolean
 
       def preserve_original_mailer_layout
-        return unless layout_name == 'mailer'
-
-        original_mailer = File.join(layouts_base_dir, "mailer.html.#{extension}")
-        rename_filename = File.join(layouts_base_dir, "old_mailer_#{Time.now.to_i}.html.erb")
-        File.rename(original_mailer, rename_filename) if File.exist? original_mailer
+        if layout_name == 'mailer' && extension == 'erb'
+          original_mailer = File.join(layouts_base_dir, "mailer.html.erb")
+          rename_filename = File.join(layouts_base_dir, "old_mailer_#{Time.now.to_i}.html.erb")
+          File.rename(original_mailer, rename_filename) if File.exist? original_mailer
+        end
       end
 
       def create_mailer_stylesheet
@@ -32,6 +34,13 @@ module Inky
 
       def layouts_base_dir
         File.join('app', 'views', 'layouts')
+      end
+
+      def extension
+        %w(haml slim).each do |ext|
+          return ext if options.send(ext)
+        end
+        'erb'
       end
     end
   end
