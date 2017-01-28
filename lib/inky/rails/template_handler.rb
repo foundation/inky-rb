@@ -14,6 +14,7 @@ module Inky
 
       def call(template)
         compiled_source = engine_handler.call(template)
+
         "Inky::Core.new.release_the_kraken(begin; #{compiled_source};end)"
       end
 
