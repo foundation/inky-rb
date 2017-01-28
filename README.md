@@ -108,6 +108,29 @@ welcome.html.haml => welcome.html.inky-haml
 pw_reset.html.erb => pw_reset.html.inky-erb
 ```
 
+## Other options
+
+### Column Count
+
+You can change the column count in the initializer too:
+
+```ruby
+# config/initializers/inky.rb
+Inky.configure do |config|
+  config.column_count = 24
+end
+```
+
+Make sure to change the SASS variable as well:
+
+```sass
+# assets/stylesheets/foundation_emails.scss
+# ...
+$grid-column-count: 24;
+
+@import "foundation-emails";
+```
+
 ## Custom Elements
 
 Inky simplifies the process of creating HTML emails by expanding out simple tags like `<row>` and `<column>` into full table syntax. The names of the tags can be changed with the `components` setting.
