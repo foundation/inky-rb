@@ -22,7 +22,10 @@ module Inky
     end
 
     def _combine_classes(elem, extra_classes)
-      [elem['class'], extra_classes].join(' ')
+      existing = elem['class'].to_s.split(' ')
+      to_add = extra_classes.to_s.split(' ')
+
+      (existing + to_add).uniq.join(' ')
     end
 
     def _combine_attributes(elem, extra_classes = nil)
