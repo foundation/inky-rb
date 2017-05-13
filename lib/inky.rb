@@ -31,13 +31,15 @@ module Inky
     end
 
     def release_the_kraken(html_string)
-      html_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
+      if html_string.encoding.name == "ASCII-8BIT"
+        html_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
+      end
       html_string = html_string.gsub(/doctype/i, 'DOCTYPE')
       raws, str = Inky::Core.extract_raws(html_string)
       parse_cmd = str =~ /<html/i ? :parse : :fragment
       html = Nokogiri::HTML.public_send(parse_cmd, str)
       transform_doc(html)
-      string = html.to_html(encoding: 'US-ASCII')
+      string = html.to_html
       Inky::Core.re_inject_raws(string, raws)
     end
 
