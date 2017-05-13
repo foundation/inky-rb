@@ -9,6 +9,6 @@ require 'slim'
 
 Rails.backtrace_cleaner.remove_silencers!
 RSpec.configure do |config|
-  config.expect_with(:rspec) { |c| c.syntax = [:should, :expect] }
+  config.expect_with(:rspec) { |c| c.syntax = %i[should expect] }
   # config.infer_spec_type_from_file_location!
 end
