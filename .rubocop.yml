@@ -148,3 +148,8 @@ Lint/HandleExceptions:
   Exclude:
     - 'Rakefile'
     - 'lib/inky.rb'
+
+Style/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - 'spec/**/*.rb'
