@@ -9,6 +9,6 @@ begin
 rescue LoadError
 end
 
-task test_all: [:spec, :rubocop]
+task test_all: %i[spec rubocop]
 
 task default: :test_all
