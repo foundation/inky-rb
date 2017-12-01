@@ -1,7 +1,6 @@
 AllCops:
   DisplayCopNames: true
   TargetRubyVersion: 2.1
-
 # Relaxed.Ruby.Style
 
 Style/Alias:
@@ -157,3 +156,6 @@ Style/BlockLength:
   Exclude:
     - 'Rakefile'
     - 'spec/**/*.rb'
+
+Style/Encoding:
+  Enabled: false
