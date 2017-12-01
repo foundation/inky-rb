@@ -5,7 +5,7 @@ INKY_VERSION_REQUIRED = Inky::NODE_VERSION
 
 def npm_packages
   JSON.parse(`npm list -g --depth=1 --json=true`)
-rescue
+rescue SystemCallError, JSON::ParserError
   puts <<-Err
     npm not detected, skipping comparison tests.
   Err
@@ -18,7 +18,7 @@ def inky_cli_ok?
   return true if version >= INKY_VERSION_REQUIRED
   puts "Requires inky version #{INKY_VERSION_REQUIRED}+, currently installed #{version}"
   false
-rescue
+rescue NoMethodError
   puts <<-Err
     inky-cli not globally installed, skipping comparison tests.
     Install with:
