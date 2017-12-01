@@ -19,7 +19,7 @@ Style/Documentation:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#styledocumentation
 
-Style/DotPosition:
+Layout/DotPosition:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#styledotposition
 
@@ -87,11 +87,11 @@ Style/SingleLineMethods:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylesinglelinemethods
 
-Style/SpaceBeforeBlockBraces:
+Layout/SpaceBeforeBlockBraces:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylespacebeforeblockbraces
 
-Style/SpaceInsideParens:
+Layout/SpaceInsideParens:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylespaceinsideparens
 
@@ -152,7 +152,7 @@ Lint/HandleExceptions:
     - 'Rakefile'
     - 'lib/inky.rb'
 
-Style/BlockLength:
+Metrics/BlockLength:
   Exclude:
     - 'Rakefile'
     - 'spec/**/*.rb'
