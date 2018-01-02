@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ["ZURB"]
   s.email       = ['foundation@zurb.com']
   s.homepage    = 'https://github.com/zurb/inky-rb'
+  s.licenses    = ['MIT']
 
   s.files         = `git ls-files -z`.split("\x0")
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
