@@ -7,6 +7,7 @@ module Inky
 
       def engine_handler
         return @engine_handler if @engine_handler
+
         type = ::Inky.configuration.template_engine
         ActionView::Template.registered_template_handler(type) ||
           raise("No template handler found for #{type}")
