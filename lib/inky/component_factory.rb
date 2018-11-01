@@ -121,7 +121,7 @@ module Inky
 
     def _transform_spacer(component, _inner)
       classes = _combine_classes(component, 'spacer')
-      build_table = ->(size, extra) { %{<table class="#{classes} #{extra}"><tbody><tr><td height="#{size}px" style="font-size:#{size}px;line-height:#{size}px;">&#xA0;</td></tr></tbody></table>} }
+      build_table = ->(size, extra) { %{<table class="#{classes} #{extra}"><tbody><tr><td height="#{size}" style="font-size:#{size}px;line-height:#{size}px;">&#xA0;</td></tr></tbody></table>} }
       size = component.attr('size')
       size_sm = component.attr('size-sm')
       size_lg = component.attr('size-lg')
