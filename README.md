@@ -163,4 +163,4 @@ The Inky parser can be accessed directly for programmatic use.
 Inky-rb currently requires:
 
 * Ruby 2.0+
-* Rails 3, 4 or 5
+* Rails 3, 4, 5 or 6
