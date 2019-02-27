@@ -12,6 +12,7 @@ matrix:
   exclude:
   - rvm: 2.0.0
     gemfile: gemfiles/rails_5.gemfile
+  - rvm: 2.0.0
     gemfile: gemfiles/rails_6.gemfile
 before_install:
   - 'npm install -g inky-cli'
