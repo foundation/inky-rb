@@ -57,6 +57,50 @@ RSpec.describe 'Grid' do
     compare(input, expected)
   end
 
+  it 'creates a single column with default large and small classes' do
+    input = '<columns>One</columns>'
+    expected = <<-HTML
+      <th class="small-12 large-12 columns first last">
+        <table>
+          <tr>
+            <th>One</th>
+            <th class="expander"></th>
+          </tr>
+        </table>
+      </th>
+    HTML
+
+    compare(input, expected)
+  end
+
+  it 'creates a single column with default large and small classes using the column_count option' do
+    begin
+      @previous_column_count = Inky.configuration.column_count
+
+      Inky.configure do |config|
+        config.column_count = 5
+      end
+
+      input = '<columns>One</columns>'
+      expected = <<-HTML
+        <th class="small-5 large-5 columns first last">
+          <table>
+            <tr>
+              <th>One</th>
+              <th class="expander"></th>
+            </tr>
+          </table>
+        </th>
+      HTML
+
+      compare(input, expected)
+    ensure
+      Inky.configure do |config|
+        config.column_count = @previous_column_count
+      end
+    end
+  end
+
   it 'creates a single column with first and last classes' do
     input = '<columns large="12" small="12">One</columns>'
     expected = <<-HTML

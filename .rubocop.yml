@@ -1,6 +1,6 @@
 AllCops:
   DisplayCopNames: true
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.2
 # Relaxed.Ruby.Style
 
 Style/Alias:
@@ -102,10 +102,6 @@ Style/SpecialGlobalVars:
 Style/StringLiterals:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylestringliterals
-
-Style/TrailingCommaInLiteral:
-  Enabled: false
-  StyleGuide: http://relaxed.ruby.style/#styletrailingcommainliteral
 
 Style/WhileUntilModifier:
   Enabled: false

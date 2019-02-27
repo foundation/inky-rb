@@ -25,7 +25,7 @@ module Inky
 
       self.component_lookup = components.invert
 
-      self.column_count = options[:column_count] || 12
+      self.column_count = options[:column_count] || ::Inky.configuration.column_count
 
       self.component_tags = components.values
     end

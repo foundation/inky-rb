@@ -7,13 +7,19 @@ module Inky
 
       def engine_handler
         return @engine_handler if @engine_handler
+
         type = ::Inky.configuration.template_engine
         ActionView::Template.registered_template_handler(type) ||
           raise("No template handler found for #{type}")
       end
 
-      def call(template)
-        compiled_source = engine_handler.call(template)
+      def call(template, source = nil)
+        compiled_source =
+          if source
+            engine_handler.call(template, source)
+          else
+            engine_handler.call(template)
+          end
         "Inky::Core.new.release_the_kraken(begin; #{compiled_source};end)"
       end
 

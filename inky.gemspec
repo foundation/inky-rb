@@ -1,4 +1,4 @@
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'inky/rails/version'
 
@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ["ZURB"]
   s.email       = ['foundation@zurb.com']
   s.homepage    = 'https://github.com/zurb/inky-rb'
+  s.licenses    = ['MIT']
 
   s.files         = `git ls-files -z`.split("\x0")
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -17,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "foundation_emails", "~> 2"
   s.add_dependency "nokogiri"
-  s.add_development_dependency "bundler", "~> 1.6"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "capybara"
   s.add_development_dependency "rails"
   s.add_development_dependency "rake"

@@ -14,10 +14,16 @@ RSpec.describe "Configuration" do
   end
 
   describe "#configuration=" do
-    it "can set value" do
+    it "can set template_engine" do
       config = Inky::Configuration.new
       config.template_engine = :haml
       expect(config.template_engine).to eq(:haml)
+    end
+
+    it "can set column_count" do
+      config = Inky::Configuration.new
+      config.column_count = 4
+      expect(config.column_count).to eq(4)
     end
   end
 

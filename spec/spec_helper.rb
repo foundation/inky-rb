@@ -10,6 +10,7 @@ def reformat_html(html)
     .gsub(/ "/, '"').gsub(/\=" /, '="')               # Remove leading/trailing spaces inside attributes
     .gsub(/ </, '<').gsub(/> /, '>')                  # Remove leading/trailing spaces inside tags
     .gsub(' data-parsed=""', '')                      # Don't consider this known inky-node artefact
+    .gsub(' data-parsed>', '>')                       # Ditto
     .gsub('&#xA0;', ' ')                              # These are the same entity...
     .gsub(/(align="[^"]+") (class="[^"]+")/, '\2 \1') # Tweak order to match inky-node on container
     .gsub(/class\="([^"]+)"/) do                      # Sort class names

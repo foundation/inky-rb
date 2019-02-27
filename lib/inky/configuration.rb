@@ -15,6 +15,7 @@ module Inky
   # ```
   # Inky.configure do |config|
   #   config.template_engine = :slim
+  #   config.column_count = 24
   # end
   # ```
   def self.configure
@@ -22,10 +23,11 @@ module Inky
   end
 
   class Configuration
-    attr_accessor :template_engine
+    attr_accessor :template_engine, :column_count
 
     def initialize
       @template_engine = :erb
+      @column_count = 12
     end
   end
 end

@@ -14,8 +14,10 @@ end
 
 def inky_cli_ok?
   return unless packages = npm_packages
+
   version = packages['dependencies']['inky-cli']['dependencies']['inky']['version']
   return true if version >= INKY_VERSION_REQUIRED
+
   puts "Requires inky version #{INKY_VERSION_REQUIRED}+, currently installed #{version}"
   false
 rescue NoMethodError
