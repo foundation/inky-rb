@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "foundation_emails", "~> 2"
   s.add_dependency "nokogiri"
-  s.add_development_dependency "bundler", "~> 1.6"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "capybara"
   s.add_development_dependency "rails"
   s.add_development_dependency "rake"
