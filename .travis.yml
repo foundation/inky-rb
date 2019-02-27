@@ -12,5 +12,4 @@ matrix:
   - rvm: 2.0.0
     gemfile: gemfiles/rails_5.gemfile
 before_install:
-  - gem install bundler
   - 'npm install -g inky-cli'
