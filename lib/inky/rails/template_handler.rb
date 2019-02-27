@@ -13,9 +13,13 @@ module Inky
           raise("No template handler found for #{type}")
       end
 
-      def call(template)
-        compiled_source = engine_handler.call(template)
-
+      def call(template, source = nil)
+        compiled_source =
+          if source
+            engine_handler.call(template, source)
+          else
+            engine_handler.call(template)
+          end
         "Inky::Core.new.release_the_kraken(begin; #{compiled_source};end)"
       end
 
