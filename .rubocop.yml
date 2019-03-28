@@ -153,5 +153,8 @@ Metrics/BlockLength:
     - 'Rakefile'
     - 'spec/**/*.rb'
 
+Style/MutableConstant:
+  Enabled: false
+
 Style/Encoding:
   Enabled: false
