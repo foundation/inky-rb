@@ -12,6 +12,11 @@ module Inky
     tags = tags.to_set if tags.respond_to? :to_set
     IGNORED_ON_PASSTHROUGH = tags.freeze
 
+    # These constants are used to circumvent an issue with JRuby Nokogiri.
+    # For more details see https://github.com/zurb/inky-rb/pull/94
+    INTERIM_TH_TAG = 'inky-interim-th'.freeze
+    INTERIM_TH_TAG_REGEX = %r{(?<=\<|\<\/)#{Regexp.escape(INTERIM_TH_TAG)}}
+
     def _pass_through_attributes(elem)
       elem.attributes.reject { |e| IGNORED_ON_PASSTHROUGH.include?(e.downcase) }.map do |name, value|
         %{#{name}="#{value}" }
@@ -60,7 +65,7 @@ module Inky
     def _transform_menu_item(component, inner)
       target = _target_attribute(component)
       attributes = _combine_attributes(component, 'menu-item')
-      %{<th #{attributes}><a href="#{component.attr('href')}"#{target}>#{inner}</a></th>}
+      %{<#{INTERIM_TH_TAG} #{attributes}><a href="#{component.attr('href')}"#{target}>#{inner}</a></#{INTERIM_TH_TAG}>}
     end
 
     def _transform_container(component, inner)
@@ -91,7 +96,7 @@ module Inky
       subrows = component.elements.css(".row").to_a.concat(component.elements.css("row").to_a)
       expander = %{<th class="expander"></th>} if large_size.to_i == column_count && subrows.empty?
 
-      %{<th class="#{classes}" #{_pass_through_attributes(component)}><table><tr><th>#{inner}</th>#{expander}</tr></table></th>}
+      %{<#{INTERIM_TH_TAG} class="#{classes}" #{_pass_through_attributes(component)}><table><tr><th>#{inner}</th>#{expander}</tr></table></#{INTERIM_TH_TAG}>}
     end
 
     def _transform_block_grid(component, inner)
