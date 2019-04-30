@@ -7,7 +7,7 @@ module Inky
   # Set Inky's configuration
   # @param config [Inky::Configuration]
   def self.configuration=(config)
-    @configuration = config
+    @configuration = config if config.is_a?(Configuration)
   end
 
   # Modify Inky's current configuration
@@ -23,11 +23,24 @@ module Inky
   end
 
   class Configuration
-    attr_accessor :template_engine, :column_count
+    attr_reader :template_engine, :column_count, :components
 
     def initialize
       @template_engine = :erb
       @column_count = 12
+      @components = {}
+    end
+
+    def template_engine=(value)
+      @template_engine = value.to_sym
+    end
+
+    def components=(value)
+      @components = value if value.is_a?(Hash)
+    end
+
+    def column_count=(value)
+      @column_count = value if value.is_a?(Integer)
     end
   end
 end

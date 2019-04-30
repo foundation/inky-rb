@@ -361,4 +361,43 @@ RSpec.describe "raw" do
     output = inky.release_the_kraken(input)
     expect(output).to eql(expected)
   end
+
+  it 'works on multiple lines' do
+    input = <<-HTML
+      <body>
+        <raw>
+          <<LCG ProgramTG LCG Coupon Code Default='246996'>>\
+          <button>
+        </raw>
+      </body>
+    HTML
+
+    # Can't do vanilla compare because the second will fail to parse
+    inky = Inky::Core.new
+    output = inky.release_the_kraken(input)
+    expect(output).to include("<<LCG ProgramTG LCG Coupon Code Default='246996'>>")
+    expect(output).to include("<button>")
+    expect(output).to_not include('raw')
+    expect(output).to_not include('<table class="button">')
+  end
+
+  it 'stops at the first </raw> tag' do
+    input = <<-HTML
+      <body>
+        <raw>
+          <<LCG ProgramTG LCG Coupon Code Default='246996'>>
+        </raw>
+        <button href="#">Test</button>
+        </raw>
+      </body>
+    HTML
+    expected = "<<LCG ProgramTG LCG Coupon Code Default='246996'>>"
+
+    # Can't do vanilla compare because the second will fail to parse
+    inky = Inky::Core.new
+    output = inky.release_the_kraken(input)
+    expect(output).to include(expected)
+    expect(output).to include('<table class="button">')
+    expect(output).to_not include('<button>')
+  end
 end
