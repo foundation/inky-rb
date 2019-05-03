@@ -1,44 +1,114 @@
 require 'spec_helper'
 
-RSpec.describe "Configuration" do
-  around do |spec|
-    Inky.configure do |config|
-      old = config.template_engine
-      spec.run
-      config.template_engine = old
+RSpec.describe "Inky.configuration" do
+  it "returns an Inky::Configuration object" do
+    expect(Inky.configuration).to be_an_instance_of Inky::Configuration
+  end
+
+  describe "=" do
+    it "accepts an Inky::Configuration" do
+      current_config = Inky.configuration
+      config = Inky::Configuration.new
+
+      Inky.configuration = config
+      expect(Inky.configuration).to_not eq(current_config)
+      expect(Inky.configuration).to eq(config)
+
+      expect { Inky.configuration = {} }.to raise_error(TypeError, "Not an Inky::Configuration")
+      expect(Inky.configuration).to eq(config)
+
+      Inky.configuration = current_config
+      expect(Inky.configuration).to eq(current_config)
     end
   end
 
-  it "default value is :erb" do
-    Inky::Configuration.new.template_engine = :erb
+  describe "&block" do
+    it "yields the current configuration" do
+      current_config = Inky.configuration
+      new_config = Inky::Configuration.new
+
+      Inky.configuration = new_config
+
+      Inky.configuration do |config|
+        expect(config).to be_an_instance_of Inky::Configuration
+        expect(config).to_not eq(current_config)
+        expect(config).to eq(new_config)
+      end
+
+      Inky.configuration = current_config
+    end
+  end
+end
+
+RSpec.describe "Configuration" do
+  describe "#template_engine" do
+    it "default value is :erb" do
+      expect(Inky::Configuration.new.template_engine).to eq(:erb)
+    end
   end
 
-  describe "#configuration=" do
-    it "can set template_engine" do
+  describe "#template_engine=" do
+    it "sets/updates the template_engine" do
       config = Inky::Configuration.new
       config.template_engine = :haml
       expect(config.template_engine).to eq(:haml)
     end
 
-    it "can set column_count" do
+    it "accepts symbols" do
       config = Inky::Configuration.new
-      config.column_count = 4
-      expect(config.column_count).to eq(4)
+      value = []
+      expect { config.template_engine = value }.to raise_error(TypeError, "#{value.inspect} (#{value.class}) does not respond to 'to_sym'")
+      expect(config.template_engine).to eq(:erb)
     end
   end
 
-  describe "#configuration=" do
-    before do
-      Inky.configure do |config|
-        config.template_engine = :haml
-      end
+  describe "#column_count" do
+    it "default value is 12" do
+      expect(Inky::Configuration.new.column_count).to eq(12)
+    end
+  end
+
+  describe "#column_count=" do
+    it "sets/updates the column_count" do
+      config = Inky::Configuration.new
+      config.column_count = 24
+      expect(config.column_count).to eq(24)
     end
 
-    it "returns :haml as configured template_engine" do
-      template_engine = Inky.configuration.template_engine
+    it "accepts integers" do
+      config = Inky::Configuration.new
+      value = :haml
+      expect { config.column_count = value }.to raise_error(TypeError, "#{value.inspect} (#{value.class}) does not respond to 'to_int'")
+      expect(config.column_count).to eq(12)
+    end
+  end
 
-      expect(template_engine).to be_a(Symbol)
-      expect(template_engine).to eq(:haml)
+  describe "#components" do
+    it "defaults to an empty hash" do
+      config = Inky::Configuration.new
+      expect(config.components).to eq({})
+    end
+  end
+
+  describe "#components=" do
+    it "can set overriden component tags" do
+      config = Inky::Configuration.new
+      config.components = { button: 'inky-button' }
+      expect(config.components).to eq(button: 'inky-button')
+    end
+
+    it "will not set an invalid components override" do
+      config = Inky::Configuration.new
+      [
+        nil,
+        1,
+        "{}",
+        false,
+        true
+      ].each do |value|
+        expect { config.components = value }.to raise_error(TypeError, "#{value.inspect} (#{value.class}) does not respond to 'to_hash'")
+        expect(config.components).to eq({})
+      end
     end
   end
 end
