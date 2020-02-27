@@ -2,32 +2,38 @@ require 'nokogiri'
 require_relative 'inky/configuration'
 require_relative 'inky/component_factory'
 
+Dir.glob(File.expand_path("../inky/components/*", __FILE__)).each do |file|
+  require_relative file
+end
+
 module Inky
   class Core
-    attr_accessor :components, :column_count, :component_lookup, :component_tags
+    attr_accessor :components, :column_count, :component_tags
+    
+    # These constants are used to circumvent an issue with JRuby Nokogiri.
+    # For more details see https://github.com/zurb/inky-rb/pull/94
+    INTERIM_TH_TAG = 'inky-interim-th'.freeze
+    INTERIM_TH_TAG_REGEX = %r{(?<=\<|\<\/)#{Regexp.escape(INTERIM_TH_TAG)}}
 
     include ComponentFactory
+
     def initialize(options = {})
       self.components = {
-        button: 'button',
-        row: 'row',
-        columns: 'columns',
-        container: 'container',
-        inky: 'inky',
-        block_grid: 'block-grid',
-        menu: 'menu',
-        center: 'center',
-        callout: 'callout',
-        spacer: 'spacer',
-        wrapper: 'wrapper',
-        menu_item: 'item'
+        "button" => Inky::Components::Button.new(self),
+        "row" => Inky::Components::Row.new(self),
+        "columns" => Inky::Components::Columns.new(self),
+        "container" => Inky::Components::Container.new(self),
+        "block-grid" => Inky::Components::BlockGrid.new(self),
+        "menu" => Inky::Components::Menu.new(self),
+        "center" => Inky::Components::Center.new(self),
+        "callout" => Inky::Components::Callout.new(self),
+        "spacer" => Inky::Components::Spacer.new(self),
+        "wrapper" => Inky::Components::Wrapper.new(self),
+        "item" => Inky::Components::MenuItem.new(self)
       }.merge(options[:components] || {})
 
-      self.component_lookup = components.invert
-
       self.column_count = options[:column_count] || ::Inky.configuration.column_count
-
-      self.component_tags = components.values
+      self.component_tags = components.keys
     end
 
     def release_the_kraken(html_string)
