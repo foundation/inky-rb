@@ -1,4 +1,6 @@
 require_relative '../helper'
+require_relative '../../lib/components/custom_block'
+require_relative '../../lib/components/custom_block_with_nested_blocks'
 
 def simple_container(text)
   <<-HTML
@@ -95,6 +97,40 @@ describe 'Rails', type: :feature do
       visit "/inky/explicit_builder"
 
       expect_same_html page.html, simple_container('Built with builder')
+    end
+  end
+
+  context "when configured to use a custom component" do
+    around do |spec|
+      Inky.configure do |config|
+        old = config.components
+        config.components = {
+          'custom-block': Components::CustomBlock,
+          'custom-block-with-nested-blocks': Components::CustomBlockWithNestedBlocks
+        }
+        spec.run
+        config.components = old
+      end
+    end
+
+    it "works with the basic custom components" do
+      visit "/inky/custom_block"
+
+      expect_includes_html page.html, <<-HTML
+        <marquee>Hello from custom block!</marquee>
+      HTML
+    end
+
+    it "works with the basic custom components" do
+      visit "/inky/custom_block_with_nested_blocks"
+
+      expect_includes_html page.html, <<-HTML
+        <table class="button">
+      HTML
+
+      expect_includes_html page.html, <<-HTML
+        <td>Hello from custom block!</td>
+      HTML
     end
   end
 end

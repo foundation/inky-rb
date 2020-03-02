@@ -20,7 +20,7 @@ module Inky
           else
             engine_handler.call(template)
           end
-        "Inky::Core.new.release_the_kraken(begin; #{compiled_source};end)"
+        "::Inky::Core.new.release_the_kraken(begin; #{compiled_source};end)"
       end
 
       module Composer

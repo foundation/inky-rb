@@ -15,22 +15,28 @@ module Inky
     INTERIM_TH_TAG = 'inky-interim-th'.freeze
     INTERIM_TH_TAG_REGEX = %r{(?<=\<|\<\/)#{Regexp.escape(INTERIM_TH_TAG)}}
 
+    DEFAULT_COMPONENTS = {
+      "button" => Inky::Components::Button,
+      "row" => Inky::Components::Row,
+      "inky" => Inky::Components::Inky,
+      "columns" => Inky::Components::Columns,
+      "container" => Inky::Components::Container,
+      "block-grid" => Inky::Components::BlockGrid,
+      "menu" => Inky::Components::Menu,
+      "center" => Inky::Components::Center,
+      "callout" => Inky::Components::Callout,
+      "spacer" => Inky::Components::Spacer,
+      "wrapper" => Inky::Components::Wrapper,
+      "item" => Inky::Components::MenuItem
+    }
+
     include ComponentFactory
 
     def initialize(options = {})
-      self.components = {
-        "button" => Inky::Components::Button.new(self),
-        "row" => Inky::Components::Row.new(self),
-        "columns" => Inky::Components::Columns.new(self),
-        "container" => Inky::Components::Container.new(self),
-        "block-grid" => Inky::Components::BlockGrid.new(self),
-        "menu" => Inky::Components::Menu.new(self),
-        "center" => Inky::Components::Center.new(self),
-        "callout" => Inky::Components::Callout.new(self),
-        "spacer" => Inky::Components::Spacer.new(self),
-        "wrapper" => Inky::Components::Wrapper.new(self),
-        "item" => Inky::Components::MenuItem.new(self)
-      }.merge(options[:components] || {})
+      self.components = DEFAULT_COMPONENTS
+        .merge(options[:components] || ::Inky.configuration.components)
+        .transform_values { |component_class| component_class.new(self) }
+        .with_indifferent_access
 
       self.column_count = options[:column_count] || ::Inky.configuration.column_count
       self.component_tags = components.keys
@@ -41,13 +47,13 @@ module Inky
         html_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
       end
       html_string = html_string.gsub(/doctype/i, 'DOCTYPE')
-      raws, str = Inky::Core.extract_raws(html_string)
+      raws, str = ::Inky::Core.extract_raws(html_string)
       parse_cmd = str =~ /<html/i ? :parse : :fragment
       html = Nokogiri::HTML.public_send(parse_cmd, str)
       transform_doc(html)
       string = html.to_html
       string.gsub!(INTERIM_TH_TAG_REGEX, 'th')
-      Inky::Core.re_inject_raws(string, raws)
+      ::Inky::Core.re_inject_raws(string, raws)
     end
 
     def transform_doc(elem)

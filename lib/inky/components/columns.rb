@@ -22,7 +22,7 @@ module Inky
         subrows = component.elements.css(".row").to_a.concat(component.elements.css("row").to_a)
         expander = %{<th class="expander"></th>} if large_size.to_i == inky.column_count && subrows.empty?
 
-        %{<#{Inky::Core::INTERIM_TH_TAG} class="#{classes}" #{_pass_through_attributes(component)}><table><tr><th>#{inner}</th>#{expander}</tr></table></#{Inky::Core::INTERIM_TH_TAG}>}
+        %{<#{::Inky::Core::INTERIM_TH_TAG} class="#{classes}" #{_pass_through_attributes(component)}><table><tr><th>#{inner}</th>#{expander}</tr></table></#{::Inky::Core::INTERIM_TH_TAG}>}
       end
       
     end

@@ -7,7 +7,7 @@ module Inky
       def transform(component, inner)
         target = _target_attribute(component)
         attributes = _combine_attributes(component, 'menu-item')
-        %{<#{Inky::Core::INTERIM_TH_TAG} #{attributes}><a href="#{component.attr('href')}"#{target}>#{inner}</a></#{Inky::Core::INTERIM_TH_TAG}>}
+        %{<#{::Inky::Core::INTERIM_TH_TAG} #{attributes}><a href="#{component.attr('href')}"#{target}>#{inner}</a></#{::Inky::Core::INTERIM_TH_TAG}>}
       end
       
     end
