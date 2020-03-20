@@ -16,6 +16,9 @@ module Inky
   # Inky.configure do |config|
   #   config.template_engine = :slim
   #   config.column_count = 24
+  #   config.components = {
+  #     'custom-block': My::Components::CustomBlock  
+  #   }
   # end
   # ```
   def self.configure
@@ -23,11 +26,12 @@ module Inky
   end
 
   class Configuration
-    attr_accessor :template_engine, :column_count
+    attr_accessor :template_engine, :column_count, :components
 
     def initialize
       @template_engine = :erb
       @column_count = 12
+      @components = {}
     end
   end
 end

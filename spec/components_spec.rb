@@ -357,7 +357,7 @@ RSpec.describe "raw" do
     expected = "<body><<LCG ProgramTG LCG Coupon Code Default='246996'>></body>"
 
     # Can't do vanilla compare because the second will fail to parse
-    inky = Inky::Core.new
+    inky = ::Inky::Core.new
     output = inky.release_the_kraken(input)
     expect(output).to eql(expected)
   end

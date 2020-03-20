@@ -15,7 +15,7 @@ RSpec.describe "Inky#release_the_kraken" do
       </table>
     HTML
 
-    output = Inky::Core.new.release_the_kraken(input)
+    output = ::Inky::Core.new.release_the_kraken(input)
     expect_same_html(output, expected)
   end
 
@@ -31,7 +31,7 @@ RSpec.describe "Inky#release_the_kraken" do
       </table>
     HTML
 
-    output = Inky::Core.new.release_the_kraken(input)
+    output = ::Inky::Core.new.release_the_kraken(input)
     expect_same_html(output, expected)
   end
 
@@ -47,7 +47,7 @@ RSpec.describe "Inky#release_the_kraken" do
       </table>
     HTML
 
-    output = Inky::Core.new.release_the_kraken(input)
+    output = ::Inky::Core.new.release_the_kraken(input)
     expect_same_html(output, expected)
     output.encoding.name.should == 'US-ASCII'
   end

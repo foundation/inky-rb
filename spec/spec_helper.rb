@@ -23,8 +23,12 @@ def expect_same_html(input, expected)
   expect(reformat_html(input)).to eql(reformat_html(expected))
 end
 
+def expect_includes_html(input, expected)
+  expect(reformat_html(input)).to include(reformat_html(expected))
+end
+
 def compare(input, expected)
-  inky = Inky::Core.new
+  inky = ::Inky::Core.new
   output = inky.release_the_kraken(input)
   expect_same_html(output, expected)
 end
