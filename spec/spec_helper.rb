@@ -17,6 +17,9 @@ def reformat_html(html)
       classes = $1.split(' ').sort.join(' ')
       %{class="#{classes}"}
     end
+    .gsub(/<td height=".+?px"/) do |m|                # Tweak out px until https://github.com/zurb/inky/pull/106 resolved
+      m.gsub('px', '')
+    end
 end
 
 def expect_same_html(input, expected)
