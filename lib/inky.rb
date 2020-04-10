@@ -21,7 +21,7 @@ module Inky
         spacer: 'spacer',
         wrapper: 'wrapper',
         menu_item: 'item'
-      }.merge(options[:components] || {})
+      }.merge(::Inky.configuration.components).merge(options[:components] || {})
 
       self.component_lookup = components.invert
 
