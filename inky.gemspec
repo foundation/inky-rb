@@ -5,11 +5,11 @@ require 'inky/rails/version'
 Gem::Specification.new do |s|
   s.name        = 'inky-rb'
   s.version     = Inky::Rails::VERSION
-  s.summary     = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails, a responsive email framework from ZURB.  '
-  s.description = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails, a responsive email framework from ZURB.  '
-  s.authors     = ["ZURB"]
-  s.email       = ['foundation@zurb.com']
-  s.homepage    = 'https://github.com/zurb/inky-rb'
+  s.summary     = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails'
+  s.description = 'Inky is an HTML-based templating language that converts simple HTML into complex, responsive email-ready HTML. Designed for Foundation for Emails'
+  s.authors     = ["Foundation"]
+  s.email       = ['contact@get.foundation']
+  s.homepage    = 'https://github.com/foundation/inky-rb'
   s.licenses    = ['MIT']
 
   s.files         = `git ls-files -z`.split("\x0")
