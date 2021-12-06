@@ -1,0 +1,8 @@
+<!-- pending https://github.com/foundation/inky/issues/137 --->
+Hello
+<h-line/>
+World
+<h-line foo="bar"/>
+Bye
+<h-line class="x" foo="bar"/>
+Zzz

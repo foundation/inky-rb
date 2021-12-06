@@ -20,7 +20,8 @@ module Inky
         callout: 'callout',
         spacer: 'spacer',
         wrapper: 'wrapper',
-        menu_item: 'item'
+        menu_item: 'item',
+        h_line: 'h-line',
       }.merge(::Inky.configuration.components).merge(options[:components] || {})
 
       self.component_lookup = components.invert
