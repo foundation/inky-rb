@@ -1,0 +1,6 @@
+<!-- pending https://github.com/foundation/inky/issues/135 --->
+<div>
+  Stuff on top
+  <spacer foo="bar"/>
+  Stuff on bottom
+</div>
