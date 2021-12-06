@@ -54,12 +54,12 @@ module Inky
 
       classes = _combine_classes(component, 'button')
       expander = '<td class="expander"></td>' if expand
-      %{<table class="#{classes}"><tr><td><table><tr><td>#{inner}</td></tr></table></td>#{expander}</tr></table>}
+      %{<table class="#{classes}"><tbody><tr><td><table><tbody><tr><td>#{inner}</td></tr></tbody></table></td>#{expander}</tr></tbody></table>}
     end
 
     def _transform_menu(component, inner)
       attributes = _combine_attributes(component, 'menu')
-      %{<table #{attributes}><tr><td><table><tr>#{inner}</tr></table></td></tr></table>}
+      %{<table #{attributes}><tbody><tr><td><table><tbody><tr>#{inner}</tr></tbody></table></td></tr></tbody></table>}
     end
 
     def _transform_menu_item(component, inner)
@@ -96,12 +96,12 @@ module Inky
       subrows = component.elements.css(".row").to_a.concat(component.elements.css("row").to_a)
       expander = %{<th class="expander"></th>} if large_size.to_i == column_count && subrows.empty?
 
-      %{<#{INTERIM_TH_TAG} class="#{classes}" #{_pass_through_attributes(component)}><table><tr><th>#{inner}</th>#{expander}</tr></table></#{INTERIM_TH_TAG}>}
+      %{<#{INTERIM_TH_TAG} class="#{classes}" #{_pass_through_attributes(component)}><table><tbody><tr><th>#{inner}</th>#{expander}</tr></tbody></table></#{INTERIM_TH_TAG}>}
     end
 
     def _transform_block_grid(component, inner)
       classes = _combine_classes(component, "block-grid up-#{component.attr('up')}")
-      %{<table class="#{classes}"><tr>#{inner}</tr></table>}
+      %{<table class="#{classes}"><tbody><tr>#{inner}</tr></tbody></table>}
     end
 
     def _transform_center(component, _inner)
@@ -121,12 +121,12 @@ module Inky
     def _transform_callout(component, inner)
       classes = _combine_classes(component, 'callout-inner')
       attributes = _pass_through_attributes(component)
-      %{<table #{attributes}class="callout"><tr><th class="#{classes}">#{inner}</th><th class="expander"></th></tr></table>}
+      %{<table #{attributes}class="callout"><tbody><tr><th class="#{classes}">#{inner}</th><th class="expander"></th></tr></tbody></table>}
     end
 
     def _transform_spacer(component, _inner)
       classes = _combine_classes(component, 'spacer')
-      build_table = ->(size, extra) { %{<table class="#{classes} #{extra}"><tbody><tr><td height="#{size}" style="font-size:#{size}px;line-height:#{size}px;">&#xA0;</td></tr></tbody></table>} }
+      build_table = ->(size, extra) { %{<table class="#{classes} #{extra}"><tbody><tr><td height="#{size}" style="font-size:#{size}px;line-height:#{size}px;">&nbsp;</td></tr></tbody></table>} }
       size = component.attr('size')
       size_sm = component.attr('size-sm')
       size_lg = component.attr('size-lg')
@@ -142,7 +142,7 @@ module Inky
 
     def _transform_wrapper(component, inner)
       attributes = _combine_attributes(component, 'wrapper')
-      %{<table #{attributes} align="center"><tr><td class="wrapper-inner">#{inner}</td></tr></table>}
+      %{<table #{attributes} align="center"><tbody><tr><td class="wrapper-inner">#{inner}</td></tr></tbody></table>}
     end
   end
 end
