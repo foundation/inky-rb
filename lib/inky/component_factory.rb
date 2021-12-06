@@ -141,6 +141,12 @@ module Inky
       end
     end
 
+    def _transform_h_line(component, _inner)
+      classes = _combine_classes(component, 'h-line')
+      attributes = _pass_through_attributes(component)
+      %{<table #{attributes}class="#{classes}"><tr><th>&nbsp;</th></tr></table>}
+    end
+
     def _transform_wrapper(component, inner)
       attributes = _combine_attributes(component, 'wrapper')
       %{<table #{attributes} align="center"><tbody><tr><td class="wrapper-inner">#{inner}</td></tr></tbody></table>}
