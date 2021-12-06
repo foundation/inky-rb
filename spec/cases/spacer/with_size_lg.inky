@@ -1,4 +1,4 @@
 <div>
   Stuff on top
-  <spacer class="some classes" foo="bar" size-lg="666"/>
+  <spacer class="some classes" size-lg="666"/>
 <p>Stuff on bottom</p>
