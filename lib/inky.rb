@@ -41,6 +41,7 @@ module Inky
       transform_doc(html)
       string = html.to_html
       string.gsub!(INTERIM_TH_TAG_REGEX, 'th')
+      string.gsub!(' ', '&nbsp;') # Convert non-breaking spaces to explicit &nbsp; entity
       Inky::Core.re_inject_raws(string, raws)
     end
 

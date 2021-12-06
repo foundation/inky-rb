@@ -259,7 +259,7 @@ RSpec.describe "Spacer" do
       <table class="spacer">
         <tbody>
           <tr>
-            <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+            <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -274,7 +274,7 @@ RSpec.describe "Spacer" do
       <table class="spacer hide-for-large">
         <tbody>
           <tr>
-            <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+            <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -289,7 +289,7 @@ RSpec.describe "Spacer" do
       <table class="spacer show-for-large">
         <tbody>
           <tr>
-            <td height="20" style="font-size:20px;line-height:20px;">&#xA0;</td>
+            <td height="20" style="font-size:20px;line-height:20px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -304,14 +304,14 @@ RSpec.describe "Spacer" do
         <table class="spacer hide-for-large">
           <tbody>
             <tr>
-              <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+              <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
             </tr>
           </tbody>
         </table>
         <table class="spacer show-for-large">
           <tbody>
             <tr>
-              <td height="20" style="font-size:20px;line-height:20px;">&#xA0;</td>
+              <td height="20" style="font-size:20px;line-height:20px;">&nbsp;</td>
             </tr>
           </tbody>
         </table>
@@ -326,7 +326,7 @@ RSpec.describe "Spacer" do
       <table class="spacer bgcolor">
         <tbody>
           <tr>
-            <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+            <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
