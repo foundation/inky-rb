@@ -45,10 +45,11 @@ module Inky
 
     def _transform_button(component, inner)
       expand = _has_class(component, 'expand')
+      attributes = _pass_through_attributes(component)
       if component.attr('href')
         target = _target_attribute(component)
         extra = ' align="center" class="float-center"' if expand
-        inner = %{<a href="#{component.attr('href')}"#{target}#{extra}>#{inner}</a>}
+        inner = %{<a #{attributes}href="#{component.attr('href')}"#{target}#{extra}>#{inner}</a>}
       end
       inner = "<center>#{inner}</center>" if expand
 
