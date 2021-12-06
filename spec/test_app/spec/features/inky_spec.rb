@@ -38,9 +38,9 @@ describe 'Rails', type: :feature do
       <!DOCTYPE html>
       <html><body>
         <container>
-          <table class="button"><tr><td>
-            <table><tr><td><a href="bar">Click me</a></td></tr></table>
-          </td></tr></table>
+          <table class="button"><tbody><tr><td>
+            <table><tbody><tr><td><a href="bar">Click me</a></td></tr></tbody></table>
+          </td></tr></tbody></table>
         </container>
       </body></html>
     HTML
