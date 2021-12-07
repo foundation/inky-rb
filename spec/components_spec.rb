@@ -31,19 +31,19 @@ RSpec.describe "Center" do
 
     expected = <<-HTML
       <center>
-        <table class="float-center menu " align="center">
+        <table class="float-center menu " align="center"><tbody>
           <tr>
             <td>
-              <table>
+              <table><tbody>
                 <tr>
                   <th class="float-center menu-item">
                     <a href="#"></a>
                   </th>
                 </tr>
-              </table>
+              </tbody></table>
             </td>
           </tr>
-        </table>
+        </tbody></table>
       </center>
     HTML
 
@@ -55,17 +55,17 @@ RSpec.describe "Button" do
   it "creates a simple button" do
     input = '<button href="http://zurb.com">Button</button>'
     expected = <<-HTML
-      <table class="button">
+      <table class="button"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
                 <td><a href="http://zurb.com">Button</a></td>
               </tr>
-            </table>
+            </tbody></table>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
     compare(input, expected)
   end
@@ -73,17 +73,17 @@ RSpec.describe "Button" do
   it 'creates a button with target="_blank" attribute' do
     input = '<button href="http://zurb.com" target="_blank">Button</button>'
     expected = <<-HTML
-      <table class="button">
+      <table class="button"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
                 <td><a href="http://zurb.com" target="_blank">Button</a></td>
               </tr>
-            </table>
+            </tbody></table>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
     compare(input, expected)
   end
@@ -91,17 +91,17 @@ RSpec.describe "Button" do
   it 'creates a button with classes' do
     input = '<button class="small alert" href="http://zurb.com">Button</button>'
     expected = <<-HTML
-      <table class="button small alert">
+      <table class="button small alert"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
                 <td><a href="http://zurb.com">Button</a></td>
               </tr>
-            </table>
+            </tbody></table>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -110,20 +110,20 @@ RSpec.describe "Button" do
   it 'creates a correct expanded button' do
     input = '<button class="expand" href="http://zurb.com">Button</button>'
     expected = <<-HTML
-      <table class="button expand">
+      <table class="button expand"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
                 <td>
                   <center><a href="http://zurb.com" align="center" class="float-center">Button</a></center>
                 </td>
               </tr>
-            </table>
+            </tbody></table>
           </td>
           <td class="expander"></td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -138,17 +138,17 @@ RSpec.describe "Menu" do
       </menu>
     INKY
     expected = <<-HTML
-      <table class="menu">
+      <table class="menu"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
                 <th class="menu-item"><a href="http://zurb.com">Item</a></th>
               </tr>
-            </table>
+            </tbody></table>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -161,17 +161,17 @@ RSpec.describe "Menu" do
       </menu>
     INKY
     expected = <<-HTML
-      <table class="menu">
+      <table class="menu"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
                 <th class="menu-item"><a href="http://zurb.com" target="_blank">Item</a></th>
               </tr>
-            </table>
+            </tbody></table>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -183,16 +183,16 @@ RSpec.describe "Menu" do
       </menu>
     INKY
     expected = <<-HTML
-      <table class="menu vertical">
+      <table class="menu vertical"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
               </tr>
-            </table>
+            </tbody></table>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -205,17 +205,17 @@ RSpec.describe "Menu" do
       </menu>
     INKY
     expected = <<-HTML
-      <table class="menu">
+      <table class="menu"><tbody>
         <tr>
           <td>
-            <table>
+            <table><tbody>
               <tr>
                 <th class="menu-item"><a href="http://zurb.com">Item 1</a></th>
               </tr>
-            </table>
+            </tbody></table>
           </td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -226,12 +226,12 @@ RSpec.describe "Callout" do
   it "creates a callout with correct syntax" do
     input = '<callout>Callout</callout>'
     expected = <<-HTML
-      <table class="callout">
+      <table class="callout"><tbody>
         <tr>
           <th class="callout-inner">Callout</th>
           <th class="expander"></th>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -240,12 +240,12 @@ RSpec.describe "Callout" do
   it "copies classes to the final HTML" do
     input = '<callout class="primary">Callout</callout>'
     expected = <<-HTML
-      <table class="callout">
+      <table class="callout"><tbody>
         <tr>
           <th class="callout-inner primary">Callout</th>
           <th class="expander"></th>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -259,7 +259,7 @@ RSpec.describe "Spacer" do
       <table class="spacer">
         <tbody>
           <tr>
-            <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+            <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -274,7 +274,7 @@ RSpec.describe "Spacer" do
       <table class="spacer hide-for-large">
         <tbody>
           <tr>
-            <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+            <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -289,7 +289,7 @@ RSpec.describe "Spacer" do
       <table class="spacer show-for-large">
         <tbody>
           <tr>
-            <td height="20" style="font-size:20px;line-height:20px;">&#xA0;</td>
+            <td height="20" style="font-size:20px;line-height:20px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -304,14 +304,14 @@ RSpec.describe "Spacer" do
         <table class="spacer hide-for-large">
           <tbody>
             <tr>
-              <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+              <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
             </tr>
           </tbody>
         </table>
         <table class="spacer show-for-large">
           <tbody>
             <tr>
-              <td height="20" style="font-size:20px;line-height:20px;">&#xA0;</td>
+              <td height="20" style="font-size:20px;line-height:20px;">&nbsp;</td>
             </tr>
           </tbody>
         </table>
@@ -326,7 +326,7 @@ RSpec.describe "Spacer" do
       <table class="spacer bgcolor">
         <tbody>
           <tr>
-            <td height="10" style="font-size:10px;line-height:10px;">&#xA0;</td>
+            <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -340,11 +340,11 @@ RSpec.describe "Wrapper" do
   it 'creates a wrapper that you can attach classes to' do
     input = '<wrapper class="header"></wrapper>'
     expected = <<-HTML
-      <table class="wrapper header" align="center">
+      <table class="wrapper header" align="center"><tbody>
         <tr>
           <td class="wrapper-inner"></td>
         </tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)

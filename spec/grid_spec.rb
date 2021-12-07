@@ -61,12 +61,12 @@ RSpec.describe 'Grid' do
     input = '<columns>One</columns>'
     expected = <<-HTML
       <th class="small-12 large-12 columns first last">
-        <table>
+        <table><tbody>
           <tr>
             <th>One</th>
             <th class="expander"></th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     HTML
 
@@ -84,12 +84,12 @@ RSpec.describe 'Grid' do
       input = '<columns>One</columns>'
       expected = <<-HTML
         <th class="small-5 large-5 columns first last">
-          <table>
+          <table><tbody>
             <tr>
               <th>One</th>
               <th class="expander"></th>
             </tr>
-          </table>
+          </tbody></table>
         </th>
       HTML
 
@@ -105,12 +105,12 @@ RSpec.describe 'Grid' do
     input = '<columns large="12" small="12">One</columns>'
     expected = <<-HTML
       <th class="small-12 large-12 columns first last">
-        <table>
+        <table><tbody>
           <tr>
             <th>One</th>
             <th class="expander"></th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     HTML
 
@@ -127,18 +127,18 @@ RSpec.describe 'Grid' do
     expected = <<-HTML
       <body>
         <th class="small-12 large-6 columns first">
-          <table>
+          <table><tbody>
             <tr>
               <th>One</th>
             </tr>
-          </table>
+          </tbody></table>
         </th>
         <th class="small-12 large-6 columns last">
-          <table>
+          <table><tbody>
             <tr>
               <th>Two</th>
             </tr>
-          </table>
+          </tbody></table>
         </th>
       </body>
     HTML
@@ -157,25 +157,25 @@ RSpec.describe 'Grid' do
     expected = <<-INKY
     <body>
       <th class="small-12 large-4 columns first">
-        <table>
+        <table><tbody>
           <tr>
             <th>One</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
       <th class="small-12 large-4 columns">
-        <table>
+        <table><tbody>
           <tr>
             <th>Two</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
       <th class="small-12 large-4 columns last">
-        <table>
+        <table><tbody>
           <tr>
             <th>Three</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     </body>
     INKY
@@ -187,12 +187,12 @@ RSpec.describe 'Grid' do
     input = '<columns class="small-offset-8 hide-for-small">One</columns>'
     expected = <<-HTML
       <th class="small-12 large-12 columns small-offset-8 hide-for-small first last">
-        <table>
+        <table><tbody>
           <tr>
             <th>One</th>
             <th class="expander"></th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     HTML
 
@@ -210,18 +210,18 @@ RSpec.describe 'Grid' do
     expected = <<-INKY
     <body>
       <th class="small-4 large-4 columns first">
-        <table>
+        <table><tbody>
           <tr>
             <th>One</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
       <th class="small-8 large-8 columns last">
-        <table>
+        <table><tbody>
           <tr>
             <th>Two</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     </body>
     INKY
@@ -239,18 +239,18 @@ RSpec.describe 'Grid' do
     expected = <<-HTML
     <body>
       <th class="small-12 large-4 columns first">
-        <table>
+        <table><tbody>
           <tr>
             <th>One</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
       <th class="small-12 large-8 columns last">
-        <table>
+        <table><tbody>
           <tr>
             <th>Two</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     </body>
     HTML
@@ -268,18 +268,18 @@ RSpec.describe 'Grid' do
     expected = <<-HTML
     <body>
       <th class="small-12 large-6 columns first">
-        <table>
+        <table><tbody>
           <tr>
             <th>One</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
       <th class="small-12 large-6 columns last">
-        <table>
+        <table><tbody>
           <tr>
             <th>Two</th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     </body>
     HTML
@@ -294,7 +294,7 @@ RSpec.describe 'Grid' do
         <tbody>
           <tr>
             <th class="small-12 large-12 columns first last">
-              <table>
+              <table><tbody>
                 <tr>
                   <th>
                     <table class="row">
@@ -304,7 +304,7 @@ RSpec.describe 'Grid' do
                     </table>
                   </th>
                 </tr>
-              </table>
+              </tbody></table>
             </th>
           </tr>
         </tbody>
@@ -318,13 +318,13 @@ RSpec.describe 'Grid' do
     input = '<columns small="6" valign="middle" foo="bar">x</columns>'
     expected = <<-HTML
       <th class="small-6 large-6 columns first last" valign="middle" foo="bar">
-        <table>
+        <table><tbody>
           <tr>
             <th>
               x
             </th>
           </tr>
-        </table>
+        </tbody></table>
       </th>
     HTML
 
@@ -336,9 +336,9 @@ RSpec.describe 'Block Grid' do
   it 'returns the correct block grid syntax' do
     input = '<block-grid up="4"></block-grid>'
     expected = <<-HTML
-      <table class="block-grid up-4">
+      <table class="block-grid up-4"><tbody>
         <tr></tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
@@ -347,9 +347,9 @@ RSpec.describe 'Block Grid' do
   it 'copies classes to the final HTML output' do
     input = '<block-grid up="4" class="show-for-large"></block-grid>'
     expected = <<-HTML
-      <table class="block-grid up-4 show-for-large">
+      <table class="block-grid up-4 show-for-large"><tbody>
         <tr></tr>
-      </table>
+      </tbody></table>
     HTML
 
     compare(input, expected)
