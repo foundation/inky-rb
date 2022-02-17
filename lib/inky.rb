@@ -32,8 +32,8 @@ module Inky
     end
 
     def release_the_kraken(html_string)
-      if html_string.encoding.name == "ASCII-8BIT"
-        html_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
+      if html_string.encoding.name == Encoding::BINARY
+        html_string.force_encoding(Encoding::UTF_8) # transform_doc barfs if encoding is ASCII-8bit
       end
       html_string = html_string.gsub(/doctype/i, 'DOCTYPE')
       raws, str = Inky::Core.extract_raws(html_string)
