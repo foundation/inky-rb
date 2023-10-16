@@ -32,6 +32,9 @@ module Inky
     end
 
     def release_the_kraken(html_string)
+      # Force conversion to string. (required for Rails 7.1+)
+      html_string = html_string.to_s
+
       if html_string.encoding.name == "ASCII-8BIT"
         html_string.force_encoding('utf-8') # transform_doc barfs if encoding is ASCII-8bit
       end
